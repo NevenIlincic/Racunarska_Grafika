@@ -26,7 +26,7 @@ public:
         int rows = 5;
         int cols = 10;
         float spacingX = 0.15f;
-        float spacingY = 0.2f;
+        float spacingY = 0.3f;
         seatSize = 0.1f;
 
         canManipulateSeats = true;
@@ -66,10 +66,10 @@ public:
         glBindVertexArray(VAO);
 
         for (Seat& seat : seats) {
-            glUniform3f(glGetUniformLocation(shaderProgram, "uColor"), seat.r, seat.g, seat.b); // zeleno
+            glUniform3f(glGetUniformLocation(shaderProgram, "uColor"), seat.r, seat.g, seat.b);
          
             glUniform1f(glGetUniformLocation(shaderProgram, "uX"), seat.x);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uY"), seat.y);
+            glUniform1f(glGetUniformLocation(shaderProgram, "uY"), seat.y - 0.3f);
             glUniform1f(glGetUniformLocation(shaderProgram, "uSx"), seatSize);
             glUniform1f(glGetUniformLocation(shaderProgram, "uSy"), seatSize);
             glUniform1f(glGetUniformLocation(shaderProgram, "uAlpha"), 1.0f);
@@ -87,7 +87,7 @@ public:
             for (Seat& seat : seats) {
 
                 if (mouseX >= seat.x - halfSize && mouseX <= seat.x + halfSize &&
-                    mouseY >= seat.y - halfSize && mouseY <= seat.y + halfSize) {
+                    mouseY >= seat.y - halfSize - 0.3f && mouseY <= seat.y - 0.3f + halfSize) {
                     seat.reserveSeat();
 
                     if (seat.state == State::Free) {
@@ -96,6 +96,7 @@ public:
                     else {
                         takenSeats++;
                     }
+                    break;
                 }
             }
         }
@@ -117,6 +118,10 @@ public:
                     startingSeatIndex = i;
                     checkedFreeSeats++;
                     for (int z = 1; z < numSeats; z++) {
+                        if (i - z < 0) {
+                            checkedFreeSeats = 0;
+                            break;
+                        }
                         Seat adjacentSeat = seats[i - z];
                         if (adjacentSeat.state != State::Free) {
                             checkedFreeSeats = 0;

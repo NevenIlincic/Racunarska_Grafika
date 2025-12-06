@@ -5,6 +5,7 @@
 #include "../SeatsManager.cpp"
 #include "../Canvas.cpp"
 #include "../DarkRect.cpp"
+#include "../Door.cpp"
 
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
@@ -21,6 +22,7 @@ float uY = 0.0f;
 SeatsManager seatsManager;
 Canvas canvas;
 DarkRect darkRect;
+Door door;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -37,6 +39,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
         darkRect.changeTransparency();
         seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
+        door.openCloseDoor();
     }
 }
 
@@ -55,23 +58,23 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-void formVAOs(float* verticesRect, size_t rectSize, unsigned int& VAOrect) {
-    unsigned int VBOrect;
-    glGenVertexArrays(1, &VAOrect);
-    glGenBuffers(1, &VBOrect);
-
-    glBindVertexArray(VAOrect);
-    glBindBuffer(GL_ARRAY_BUFFER, VBOrect);
-    glBufferData(GL_ARRAY_BUFFER, rectSize, verticesRect, GL_STATIC_DRAW);
-
-    // Atribut 0 (pozicija):
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    // Atribut 1 (boja):
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-}
+//void formVAOs(float* verticesRect, size_t rectSize, unsigned int& VAOrect) {
+//    unsigned int VBOrect;
+//    glGenVertexArrays(1, &VAOrect);
+//    glGenBuffers(1, &VBOrect);
+//
+//    glBindVertexArray(VAOrect);
+//    glBindBuffer(GL_ARRAY_BUFFER, VBOrect);
+//    glBufferData(GL_ARRAY_BUFFER, rectSize, verticesRect, GL_STATIC_DRAW);
+//
+//    // Atribut 0 (pozicija):
+//    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+//    glEnableVertexAttribArray(0);
+//
+//    // Atribut 1 (boja):
+//    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+//    glEnableVertexAttribArray(1);
+//}
 
 
 int main()
@@ -107,6 +110,7 @@ int main()
     seatsManager = SeatsManager(rectShader); // koristimo isti shader za sedišta
     canvas = Canvas(rectShader);
     darkRect = DarkRect(rectShader);
+    door = Door(rectShader);
 
 
     glfwSetKeyCallback(window, key_callback);
@@ -118,9 +122,11 @@ int main()
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        darkRect.draw();
+        door.draw();
         seatsManager.draw(); // Iscrtavanje sedista
         canvas.draw();
+        darkRect.draw();
+       
 
         glfwSwapBuffers(window);
         glfwPollEvents();

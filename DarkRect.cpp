@@ -59,7 +59,7 @@ public:
 
         glUniform1f(glGetUniformLocation(shaderProgram, "uX"), 0.0f);
         glUniform1f(glGetUniformLocation(shaderProgram, "uY"), 0.0f);
-       // glUniform1f(glGetUniformLocation(shaderProgram, "uSx"), this->canvasScaleX);
+        glUniform1f(glGetUniformLocation(shaderProgram, "uSx"), this->canvasScaleX);
         glUniform1f(glGetUniformLocation(shaderProgram, "uSy"), this->canvasScaleY);
         glUniform1f(glGetUniformLocation(shaderProgram, "uAlpha"), this->alpha);
 

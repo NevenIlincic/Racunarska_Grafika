@@ -20,15 +20,15 @@ public:
 
 	Canvas(unsigned int shader): shaderProgram(shader) {
 
-        x = -0.0f;
-        y = 0.8f;
+        x = 0.1f;
+        y = 0.95f;
 
         r = 1.0f;
         g = 1.0f;
         b = 1.0f;
 
-        canvasScaleX = 1.5f;
-        canvasScaleY = 0.5f;
+        canvasScaleX = 1.4f;
+        canvasScaleY = 0.25f;
 
         // Kreiranje jednog VAO/VBO za kvadrat
         float quadVertices[] = {

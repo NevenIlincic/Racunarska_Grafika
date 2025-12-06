@@ -126,6 +126,8 @@
   <ItemGroup>
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="DarkRect.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="DoorState.cpp" />
     <ClCompile Include="Seat.cpp" />
     <ClCompile Include="SeatsManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
