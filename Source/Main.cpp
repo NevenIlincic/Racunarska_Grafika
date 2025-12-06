@@ -51,7 +51,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         float normX = (mouseX / screenWidth) * 2.0f - 1.0f;
         float normY = 1.0f - (mouseY / screenHeight) * 2.0f;
 
-        seatsManager.click(normX, normY); // pozovi metodu SeatsManager-a
+        seatsManager.reserve(normX, normY); // pozovi metodu SeatsManager-a
     }
 }
 
@@ -103,20 +103,6 @@ int main()
     glUseProgram(rectShader);
     glUniform1i(glGetUniformLocation(rectShader, "uTex0"), 0);
     glUniform1i(glGetUniformLocation(rectShader, "uTex1"), 1);
-
-    //unsigned int colorShader = createShader("color.vert", "color.frag");
-
-   /* unsigned int VAOrect;
-
-    float verticesRect[] = {
-        0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-        0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
-        0.0f, -0.5f, 1.0f, 1.0f, 1.0f,
-        0.5f, -0.5f, 1.0f, 1.0f, 1.0f,
-    };*/
-
-
-    //formVAOs(verticesRect, sizeof(verticesRect), VAOrect);
 
     seatsManager = SeatsManager(rectShader); // koristimo isti shader za sedišta
     canvas = Canvas(rectShader);

@@ -17,6 +17,8 @@ public:
     bool canManipulateSeats;
     float seatSize;
 
+    int takenSeats;
+
     SeatsManager() {};
 
     SeatsManager(unsigned int shader) : shaderProgram(shader) {
@@ -28,6 +30,8 @@ public:
         seatSize = 0.1f;
 
         canManipulateSeats = true;
+
+        takenSeats = 0;
        
 
         for (int i = rows - 1; i >= 0; i--) {
@@ -77,7 +81,7 @@ public:
     }
 
     // Promena stanja sedišta po koordinatama klika
-    void click(float mouseX, float mouseY) {
+    void reserve(float mouseX, float mouseY) {
         float halfSize = seatSize / 2.0f;
         if (canManipulateSeats) {
             for (Seat& seat : seats) {
@@ -85,22 +89,56 @@ public:
                 if (mouseX >= seat.x - halfSize && mouseX <= seat.x + halfSize &&
                     mouseY >= seat.y - halfSize && mouseY <= seat.y + halfSize) {
                     seat.reserveSeat();
+
+                    if (seat.state == State::Free) {
+                        takenSeats--;
+                    }
+                    else {
+                        takenSeats++;
+                    }
                 }
             }
         }
     }
 
     void buySeats(int numSeats) {
+        if (numSeats > seats.size() - takenSeats) {
+            return;
+        }
+        bool canTakeSeats = false;
+        int startingSeatIndex = seats.size() - 1;
+        int checkedFreeSeats = 0;
+
         if (this->canManipulateSeats) {
+            //Provera da li postoji numSeats uzastopnih sedista
             for (int i = seats.size() - 1; i >= 0; i--) {
-                if (numSeats == 0) {
-                    break;
+                Seat& startingSeat = seats[i];
+                if (startingSeat.state == State::Free) {
+                    startingSeatIndex = i;
+                    checkedFreeSeats++;
+                    for (int z = 1; z < numSeats; z++) {
+                        Seat adjacentSeat = seats[i - z];
+                        if (adjacentSeat.state != State::Free) {
+                            checkedFreeSeats = 0;
+                            break;
+                        }
+                        checkedFreeSeats++;
+                    }
                 }
 
-                Seat& currentSeat = seats[i];
-                if (currentSeat.state == State::Free) {
+                //Ako potoji N uzastopnih sedista, moze da se kupuje
+                if (checkedFreeSeats == numSeats) {
+                    canTakeSeats = true;
+                    break;
+                }
+            }
+
+            //Kupovina sedista
+            if (canTakeSeats) {
+                for (int z = 0; z < numSeats; z++) {
+                    Seat& currentSeat = seats[startingSeatIndex - z];
                     currentSeat.buySeat();
-                    numSeats--;
+                    takenSeats++;
                 }
             }
         }
