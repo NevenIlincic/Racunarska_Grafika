@@ -1,0 +1,5 @@
+﻿  Main.cpp
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(36,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(37,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(117,18): warning C4101: 'VAOrect': unreferenced local variable
+  Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\x64\Debug\Kostur.exe
