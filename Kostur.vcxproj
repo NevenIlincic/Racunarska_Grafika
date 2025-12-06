@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="DarkRect.cpp" />
     <ClCompile Include="Seat.cpp" />
     <ClCompile Include="SeatsManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />

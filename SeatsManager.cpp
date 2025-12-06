@@ -14,6 +14,8 @@ public:
     std::vector<Seat> seats;   // lista svih sedišta
     unsigned int VAO, VBO;     // zajednički VAO/VBO
     unsigned int shaderProgram; // shader koji se koristi
+    bool canManipulateSeats;
+    float seatSize;
 
     SeatsManager() {};
 
@@ -21,12 +23,14 @@ public:
         // Primer: 5x10 sedišta
         int rows = 5;
         int cols = 10;
-        float spacingX = 0.12f;
-        float spacingY = 0.12f;
-        float seatSize = 0.1f;
+        float spacingX = 0.15f;
+        float spacingY = 0.2f;
+        seatSize = 0.1f;
+
+        canManipulateSeats = true;
        
 
-        for (int i = 0; i < rows; i++) {
+        for (int i = rows - 1; i >= 0; i--) {
             for (int j = 0; j < cols; j++) {
                 seats.push_back(Seat(j * spacingX - 0.6f, i * spacingY - 0.4f));
             }
@@ -62,8 +66,8 @@ public:
          
             glUniform1f(glGetUniformLocation(shaderProgram, "uX"), seat.x);
             glUniform1f(glGetUniformLocation(shaderProgram, "uY"), seat.y);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uSx"), 0.1f);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uSy"), 0.1f);
+            glUniform1f(glGetUniformLocation(shaderProgram, "uSx"), seatSize);
+            glUniform1f(glGetUniformLocation(shaderProgram, "uSy"), seatSize);
             glUniform1f(glGetUniformLocation(shaderProgram, "uAlpha"), 1.0f);
 
             glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
@@ -74,17 +78,32 @@ public:
 
     // Promena stanja sedišta po koordinatama klika
     void click(float mouseX, float mouseY) {
-        float halfSize = 0.1f / 2.0f;
-        std::cout << seats.size() << std::endl;
-        for (Seat& seat : seats) {
-            printf("Klik: %.2f %.2f | Seat: %.2f %.2f\n",
-                mouseX, mouseY, seat.x, seat.y);
-            if (mouseX >= seat.x - halfSize && mouseX <= seat.x + halfSize &&
-                mouseY >= seat.y - halfSize && mouseY <= seat.y + halfSize) {
-                seat.reserveSeat();
-             
-                
+        float halfSize = seatSize / 2.0f;
+        if (canManipulateSeats) {
+            for (Seat& seat : seats) {
+
+                if (mouseX >= seat.x - halfSize && mouseX <= seat.x + halfSize &&
+                    mouseY >= seat.y - halfSize && mouseY <= seat.y + halfSize) {
+                    seat.reserveSeat();
+                }
             }
         }
     }
+
+    void buySeats(int numSeats) {
+        if (this->canManipulateSeats) {
+            for (int i = seats.size() - 1; i >= 0; i--) {
+                if (numSeats == 0) {
+                    break;
+                }
+
+                Seat& currentSeat = seats[i];
+                if (currentSeat.state == State::Free) {
+                    currentSeat.buySeat();
+                    numSeats--;
+                }
+            }
+        }
+    }
+
 };

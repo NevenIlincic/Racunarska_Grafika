@@ -12,17 +12,26 @@ public:
 	};
 
 	void reserveSeat() {
-		if (state == State::Free) {
-			state = State::Reserved;
-			r = 0.0f;
-			g = 1.0f;
-			b = 1.0f;
-		}
-		else {
-			state = State::Free;
-			r = 0.0f;
-			g = 0.0f;
-			b = 1.0f;
+		if (state != State::Bought) {
+			if (state == State::Free) {
+				state = State::Reserved;
+				r = 1.0f;
+				g = 1.0f;
+				b = 0.0f;
+			}
+			else {
+				state = State::Free;
+				r = 0.0f;
+				g = 0.0f;
+				b = 1.0f;
+			}
 		}
 	};
+
+	void buySeat() {
+		state = State::Bought;
+		r = 1.0f;
+		g = 0.0f;
+		b = 0.0f;
+	}
 };

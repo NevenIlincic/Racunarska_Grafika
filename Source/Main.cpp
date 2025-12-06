@@ -3,6 +3,8 @@
 
 #include "../Header/Util.h"
 #include "../SeatsManager.cpp"
+#include "../Canvas.cpp"
+#include "../DarkRect.cpp"
 
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
@@ -17,11 +19,24 @@ float uX = 0.0f;
 float uY = 0.0f;
 
 SeatsManager seatsManager;
+Canvas canvas;
+DarkRect darkRect;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
+    }
+
+    if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9 && action == GLFW_PRESS) {
+        int numSeats = key - GLFW_KEY_0;
+        std::cout << numSeats << std::endl;
+        seatsManager.buySeats(numSeats);
+    }
+
+    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
+        darkRect.changeTransparency();
+        seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
     }
 }
 
@@ -36,31 +51,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         float normX = (mouseX / screenWidth) * 2.0f - 1.0f;
         float normY = 1.0f - (mouseY / screenHeight) * 2.0f;
 
-     /*   printf("KLIKNUTO!");*/
         seatsManager.click(normX, normY); // pozovi metodu SeatsManager-a
     }
-}
-
-void drawCanvas(unsigned int rectShader, unsigned int VAOrect) {
-    glUseProgram(rectShader); // Podešavanje da se crta koristeći šejder za četvorougao
-    glUniform1f(glGetUniformLocation(rectShader, "uX"), uX); // Zadatak 3
-    glUniform1f(glGetUniformLocation(rectShader, "uY"), uY); // Zadatak 2
-    //glUniform1f(glGetUniformLocation(rectShader, "uS"), uS); // Zadatak 4
-    //glUniform1i(glGetUniformLocation(rectShader, "hasHat"), hasHat);
-    //glUniform1i(glGetUniformLocation(rectShader, "flipped"), flipped);
-
-    glActiveTexture(GL_TEXTURE0);
-    //if (uS == 1.0f) {
-    //    glBindTexture(GL_TEXTURE_2D, twoLegsTexture);
-    //}
-    //else {
-    //    glBindTexture(GL_TEXTURE_2D, fourLegsTexture);
-    //}
-    //glActiveTexture(GL_TEXTURE1);
-    //glBindTexture(GL_TEXTURE_2D, hatTexture);
-
-    glBindVertexArray(VAOrect); // Podešavanje da se crta koristeći vertekse četvorougla
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4); // Crtaju se trouglovi tako da formiraju četvorougao
 }
 
 void formVAOs(float* verticesRect, size_t rectSize, unsigned int& VAOrect) {
@@ -114,19 +106,21 @@ int main()
 
     //unsigned int colorShader = createShader("color.vert", "color.frag");
 
-    unsigned int VAOrect;
+   /* unsigned int VAOrect;
 
     float verticesRect[] = {
         0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
         0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
         0.0f, -0.5f, 1.0f, 1.0f, 1.0f,
         0.5f, -0.5f, 1.0f, 1.0f, 1.0f,
-    };
+    };*/
 
 
     //formVAOs(verticesRect, sizeof(verticesRect), VAOrect);
 
     seatsManager = SeatsManager(rectShader); // koristimo isti shader za sedišta
+    canvas = Canvas(rectShader);
+    darkRect = DarkRect(rectShader);
 
 
     glfwSetKeyCallback(window, key_callback);
@@ -138,7 +132,10 @@ int main()
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        seatsManager.draw();
+        darkRect.draw();
+        seatsManager.draw(); // Iscrtavanje sedista
+        canvas.draw();
+
         glfwSwapBuffers(window);
         glfwPollEvents();
 
