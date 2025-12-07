@@ -29,6 +29,8 @@ public:
 
     bool isTimeToSpawnPeople;
     bool isMovieFinished;
+
+    bool allPeopleLeft;
     
 
 	PersonManager() {};
@@ -43,6 +45,7 @@ public:
         spawningIndex = 0;
         numPeopleToSpawn = 0;
         isMovieFinished = false;
+        allPeopleLeft = false;
 
         float quadVertices[] = {
             //  X (Lokalni), Y (Lokalni), U,     V
@@ -143,5 +146,20 @@ public:
                 }),
             spawnedPeople.end()
         );
+
+        if (spawnedPeople.empty()) {
+            allPeopleLeft = true;
+        }
+    }
+
+    void resetManager() {
+        timerInterval = 0.5f;
+        startTime = 0.0f;
+        spawningIndex = 0;
+        numPeopleToSpawn = 0;
+        isMovieFinished = false;
+        allPeopleLeft = false;
+        people.clear();
+        spawnedPeople.clear();
     }
 };

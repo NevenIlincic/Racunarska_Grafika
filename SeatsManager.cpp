@@ -162,4 +162,12 @@ public:
         return usedSeats;
     }
 
+    void resetSeats() {
+        usedSeats.clear();
+        takenSeats = 0;
+        for (Seat& seat : seats) {
+            seat.resetSeat();
+        }
+    }
+
 };

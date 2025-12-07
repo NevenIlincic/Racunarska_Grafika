@@ -43,13 +43,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
     if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9 && action == GLFW_PRESS) {
         int numSeats = key - GLFW_KEY_0;
-        std::cout << numSeats << std::endl;
         seatsManager.buySeats(numSeats);
     }
 
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
         if (!hasMovieStarted) {
-            hasMovieStarted = true;
+            hasMovieStarted = !hasMovieStarted;
             darkRect.changeTransparency();
             seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
             door.openCloseDoor();
@@ -57,6 +56,20 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             personManager.arrangePeople(usedSeats);
             personManager.isTimeToSpawnPeople = true;
         }
+    }
+}
+
+void checkForSceneReset() {
+    if (personManager.allPeopleLeft) {
+        personManager.allPeopleLeft = false;
+        hasMovieStarted = false;
+        darkRect.changeTransparency();
+        seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
+        door.openCloseDoor();
+        personManager.isTimeToSpawnPeople = false;
+        seatsManager.resetSeats();
+        personManager.resetManager();
+
     }
 }
 
@@ -132,6 +145,8 @@ int main()
         darkRect.draw();
         watermark.draw();
         personManager.draw();
+
+        checkForSceneReset();
        
 
         glfwSwapBuffers(window);
