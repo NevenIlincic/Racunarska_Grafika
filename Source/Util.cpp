@@ -105,7 +105,7 @@ unsigned loadImageToTexture(const char* filePath) {
     if (ImageData != NULL)
     {
         //Slike se osnovno ucitavaju naopako pa se moraju ispraviti da budu uspravne
-        stbi__vertical_flip(ImageData, TextureWidth, TextureHeight, TextureChannels);
+        // stbi__vertical_flip(ImageData, TextureWidth, TextureHeight, TextureChannels);
 
         // Provjerava koji je format boja ucitane slike
         GLint InternalFormat = -1;
@@ -162,4 +162,17 @@ GLFWcursor* loadImageToCursor(const char* filePath) {
         stbi_image_free(ImageData);
 
     }
+}
+
+void preprocessTexture(unsigned& texture, const char* filepath) {
+    texture = loadImageToTexture(filepath);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }

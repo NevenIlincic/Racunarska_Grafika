@@ -6,7 +6,7 @@
 #include "../Canvas.cpp"
 #include "../DarkRect.cpp"
 #include "../Door.cpp"
-
+#include "../Watermark.cpp"
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
 // Projekat je dozvoljeno pisati počevši od ovog kostura
@@ -23,6 +23,40 @@ SeatsManager seatsManager;
 Canvas canvas;
 DarkRect darkRect;
 Door door;
+Watermark watermark;
+
+unsigned watermarkTexture;
+
+void drawWatermark(unsigned int watermarkShader, unsigned int VAOwatermark) {
+    glUseProgram(watermarkShader); // Podešavanje da se crta koristeći šejder za četvorougao
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, watermarkTexture);
+
+    glBindVertexArray(VAOwatermark); // Podešavanje da se crta koristeći vertekse četvorougla
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4); // Crtaju se trouglovi tako da formiraju četvorougao
+}
+
+
+void formVAOs(float* verticesWatermark, size_t watermarkSize, unsigned int& VAOwatermark) {
+    unsigned int VBOrect;
+    glGenVertexArrays(1, &VAOwatermark);
+    glGenBuffers(1, &VBOrect);
+
+    glBindVertexArray(VAOwatermark);
+    glBindBuffer(GL_ARRAY_BUFFER, VBOrect);
+    glBufferData(GL_ARRAY_BUFFER, watermarkSize, verticesWatermark, GL_STATIC_DRAW);
+
+    // Atribut 0 (pozicija):
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
+        4 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
+        4 * sizeof(float), (void*)(2 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -58,25 +92,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-//void formVAOs(float* verticesRect, size_t rectSize, unsigned int& VAOrect) {
-//    unsigned int VBOrect;
-//    glGenVertexArrays(1, &VAOrect);
-//    glGenBuffers(1, &VBOrect);
-//
-//    glBindVertexArray(VAOrect);
-//    glBindBuffer(GL_ARRAY_BUFFER, VBOrect);
-//    glBufferData(GL_ARRAY_BUFFER, rectSize, verticesRect, GL_STATIC_DRAW);
-//
-//    // Atribut 0 (pozicija):
-//    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-//    glEnableVertexAttribArray(0);
-//
-//    // Atribut 1 (boja):
-//    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-//    glEnableVertexAttribArray(1);
-//}
-
-
 int main()
 {
     glfwInit();
@@ -106,15 +121,20 @@ int main()
     glUseProgram(rectShader);
     glUniform1i(glGetUniformLocation(rectShader, "uTex0"), 0);
     glUniform1i(glGetUniformLocation(rectShader, "uTex1"), 1);
+    unsigned int textureShader = createShader("texture.vert", "texture.frag");
 
     seatsManager = SeatsManager(rectShader); // koristimo isti shader za sedišta
     canvas = Canvas(rectShader);
     darkRect = DarkRect(rectShader);
     door = Door(rectShader);
+    watermark = Watermark(textureShader);
 
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
+
+    GLFWcursor* cursor = loadImageToCursor("Resources/movie_camera.png");
+    glfwSetCursor(window, cursor);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -126,6 +146,7 @@ int main()
         seatsManager.draw(); // Iscrtavanje sedista
         canvas.draw();
         darkRect.draw();
+        watermark.draw();
        
 
         glfwSwapBuffers(window);

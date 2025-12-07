@@ -1,14 +1,12 @@
-﻿  SeatsManager.cpp
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(110,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(115,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Main.cpp
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(110,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  Main.cpp
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(111,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(115,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(116,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(54,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(55,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(88,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(89,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Watermark.cpp
   Generating Code...
   Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\x64\Debug\Kostur.exe

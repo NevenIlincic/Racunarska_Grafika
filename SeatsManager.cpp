@@ -12,6 +12,7 @@
 class SeatsManager {
 public:
     std::vector<Seat> seats;   // lista svih sedišta
+    std::vector<Seat> usedSeats;
     unsigned int VAO, VBO;     // zajednički VAO/VBO
     unsigned int shaderProgram; // shader koji se koristi
     bool canManipulateSeats;
@@ -36,7 +37,7 @@ public:
 
         for (int i = rows - 1; i >= 0; i--) {
             for (int j = 0; j < cols; j++) {
-                seats.push_back(Seat(j * spacingX - 0.6f, i * spacingY - 0.4f));
+                seats.push_back(Seat(j * spacingX - 0.6f, i * spacingY - 0.4f, i, j));
             }
         }
 
@@ -145,6 +146,16 @@ public:
                     currentSeat.buySeat();
                     takenSeats++;
                 }
+            }
+        }
+    }
+
+    void fillUsedSeats() {
+        usedSeats.clear();
+        for (size_t i = 0; i < seats.size(); i++) {
+            Seat seat = seats[i];
+            if (seat.state == State::Reserved || seat.state == State::Bought) {
+                usedSeats.push_back(seat);
             }
         }
     }

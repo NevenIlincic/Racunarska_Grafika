@@ -48,6 +48,12 @@
     <ClCompile Include="DoorState.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Watermark.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\stb_image.h">
@@ -61,5 +67,18 @@
     <None Include="packages.config" />
     <None Include="rect.vert" />
     <None Include="rect.frag" />
+    <None Include="texture.vert" />
+    <None Include="texture.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\movie_camera.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\stickman.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\watermark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -128,12 +128,14 @@
     <ClCompile Include="DarkRect.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DoorState.cpp" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="Seat.cpp" />
     <ClCompile Include="SeatsManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Util.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="VAOs.cpp" />
+    <ClCompile Include="Watermark.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header\stb_image.h" />
@@ -143,6 +145,13 @@
     <None Include="packages.config" />
     <None Include="rect.frag" />
     <None Include="rect.vert" />
+    <None Include="texture.frag" />
+    <None Include="texture.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\movie_camera.png" />
+    <Image Include="Resources\stickman.png" />
+    <Image Include="Resources\watermark.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
