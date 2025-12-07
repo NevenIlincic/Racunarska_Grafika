@@ -71,19 +71,18 @@ public:
         glBindVertexArray(0);
     }
 
-    void openCloseDoor() {
-        if (this->state == DoorState::Closed) {
-            this->state = DoorState::Opened;
-            this->x = -0.85f;
-            this->doorScaleX = 0.05f;
-            this->doorScaleY = 0.6f;
-        }
-        else {
-            this->state = DoorState::Closed;
-            this->x = -1.0f;
-            this->doorScaleX = 0.25f;
-            this->doorScaleY = 0.15f;
-        }
+    void openDoor() {
+        this->state = DoorState::Opened;
+        this->x = -0.85f;
+        this->doorScaleX = 0.05f;
+        this->doorScaleY = 0.6f;
+    }
+
+    void closeDoor() {
+        this->state = DoorState::Closed;
+        this->x = -1.0f;
+        this->doorScaleX = 0.25f;
+        this->doorScaleY = 0.15f;
     }
 
 };

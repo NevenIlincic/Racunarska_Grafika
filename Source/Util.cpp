@@ -186,3 +186,11 @@ int generate_random_number(int min, int max) {
 
     return distrib(generator);
 }
+
+float generate_random_number(float min, float max) {
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_real_distribution<> distrib(min, max);
+
+    return distrib(generator);
+}

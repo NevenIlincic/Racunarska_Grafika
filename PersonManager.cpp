@@ -31,6 +31,7 @@ public:
     bool isMovieFinished;
 
     bool allPeopleLeft;
+    bool allPeopleSat;
     
 
 	PersonManager() {};
@@ -46,6 +47,7 @@ public:
         numPeopleToSpawn = 0;
         isMovieFinished = false;
         allPeopleLeft = false;
+        allPeopleSat = false;
 
         float quadVertices[] = {
             //  X (Lokalni), Y (Lokalni), U,     V
@@ -111,7 +113,9 @@ public:
                 glBindVertexArray(0);
 
             }
+            this->allPeopleSat = didAllPeopleSit();
         }
+
     }
 
     void arrangePeople(std::vector<Seat> usedSeats) {
@@ -161,5 +165,21 @@ public:
         allPeopleLeft = false;
         people.clear();
         spawnedPeople.clear();
+        allPeopleSat = false;
+    }
+
+    bool didAllPeopleSit() {
+        if (this->numPeopleToSpawn == 0) {
+            return false;
+        }
+        if (this->numPeopleToSpawn != spawnedPeople.size()) {
+            return false;
+        }
+        for (const Person& person : spawnedPeople) {
+            if (!person.isSitting) {
+                return false;
+            }
+        }
+        return true;
     }
 };

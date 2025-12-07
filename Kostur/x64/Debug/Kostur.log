@@ -1,6 +1,7 @@
-﻿  SeatsManager.cpp
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(111,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(116,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+﻿  Canvas.cpp
+  Door.cpp
+  PersonManager.cpp
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\PersonManager.cpp(127,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Main.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(111,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
@@ -8,10 +9,10 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(11
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(116,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\PersonManager.cpp(123,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\PersonManager.cpp(127,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(84,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(85,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(72,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(73,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Generating Code...
   Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\x64\Debug\Kostur.exe

@@ -31,6 +31,8 @@ PersonManager personManager;
 
 unsigned watermarkTexture;
 
+bool canStartMovie = true;
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
@@ -47,11 +49,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
-        if (!hasMovieStarted) {
-            hasMovieStarted = !hasMovieStarted;
+        if (!canvas.hasMovieStarted) {
             darkRect.changeTransparency();
             seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
-            door.openCloseDoor();
+            door.openDoor();
             std::vector<Seat> usedSeats = seatsManager.fillUsedSeats();
             personManager.arrangePeople(usedSeats);
             personManager.isTimeToSpawnPeople = true;
@@ -59,19 +60,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-void checkForSceneReset() {
-    if (personManager.allPeopleLeft) {
-        personManager.allPeopleLeft = false;
-        hasMovieStarted = false;
-        darkRect.changeTransparency();
-        seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
-        door.openCloseDoor();
-        personManager.isTimeToSpawnPeople = false;
-        seatsManager.resetSeats();
-        personManager.resetManager();
-
-    }
-}
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
@@ -88,6 +76,38 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
+void checkForSceneReset() {
+    if (personManager.allPeopleLeft) {
+        personManager.allPeopleLeft = false;
+        hasMovieStarted = false;
+        darkRect.changeTransparency();
+        seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
+        door.closeDoor();
+        personManager.isTimeToSpawnPeople = false;
+        seatsManager.resetSeats();
+        personManager.resetManager();
+        canvas.resetCanvas();
+        canStartMovie = true;
+
+    }
+}
+
+void checkForMovieFinish() {
+    if (canvas.isMovieFinished) {
+        personManager.isMovieFinished = true;
+        door.openDoor();
+    }
+
+
+}
+
+void checkForMovieStart() {
+    if (personManager.allPeopleSat && canStartMovie) {
+        canvas.startMovie();
+        door.closeDoor();
+        canStartMovie = false;
+    }
+}
 int main()
 {
     glfwInit();
@@ -146,6 +166,8 @@ int main()
         watermark.draw();
         personManager.draw();
 
+        checkForMovieStart();
+        checkForMovieFinish();
         checkForSceneReset();
        
 
