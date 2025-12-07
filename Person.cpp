@@ -12,7 +12,10 @@
 class Person {
 public:
 	float x, y;
-	Seat seat;
+	float destinationX, destinationY;
 
-	Person(float _x, float _y, Seat _seat) : x(_x), y(_y), seat(_seat) {};
+	Person() {};
+
+	Person(float _x, float _y, float _destinationX, float _destinationY) : 
+		x(_x), y(_y), destinationX(_destinationX), destinationY(_destinationY) {};
 };

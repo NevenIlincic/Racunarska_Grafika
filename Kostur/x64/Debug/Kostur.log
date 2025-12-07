@@ -1,12 +1,17 @@
-﻿  Main.cpp
+﻿  PersonManager.cpp
+  Main.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(111,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\SeatsManager.cpp(116,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(88,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(89,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(59,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Main.cpp(60,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Util.cpp
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Util.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  State.cpp
   Watermark.cpp
   Generating Code...
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\Source\Util.cpp(166,1): warning C4715: 'loadImageToCursor': not all control paths return a value
   Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\x64\Debug\Kostur.exe

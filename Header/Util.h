@@ -4,6 +4,6 @@
 #include <string>
 int endProgram(std::string message);
 unsigned int createShader(const char* vsSource, const char* fsSource);
-unsigned loadImageToTexture(const char* filePath);
+unsigned loadImageToTexture(const char* filePath, bool flipImage);
 GLFWcursor* loadImageToCursor(const char* filePath);
-void preprocessTexture(unsigned& texture, const char* filepath);
+void preprocessTexture(unsigned& texture, const char* filepath, bool flipImage);

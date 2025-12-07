@@ -12,7 +12,6 @@
 
 class Watermark {
 public:
-	float x, y;
     unsigned int VAO, VBO;     // zajednički VAO/VBO
     unsigned int shaderTextureProgram;
     unsigned watermarkTexture;
@@ -21,7 +20,7 @@ public:
 
 	Watermark(unsigned int shader): shaderTextureProgram(shader) {
 
-        preprocessTexture(watermarkTexture, "Resources/watermark.png");
+        preprocessTexture(watermarkTexture, "Resources/watermark.png", false);
 
         float quadVertices[] = {
             //  X,     Y,     U,    V
@@ -54,10 +53,10 @@ public:
         glUseProgram(shaderTextureProgram);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, watermarkTexture);
-
         glUniform1i(glGetUniformLocation(shaderTextureProgram, "uTex"), 0);
         glUniform1f(glGetUniformLocation(shaderTextureProgram, "uAlpha"), 0.5f);
+        glBindTexture(GL_TEXTURE_2D, watermarkTexture);
+
 
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);

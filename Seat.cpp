@@ -1,3 +1,4 @@
+#pragma once // ili
 #include <string>
 #include "State.cpp"
 

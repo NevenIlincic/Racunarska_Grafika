@@ -97,7 +97,7 @@ unsigned int createShader(const char* vsSource, const char* fsSource)
     return program;
 }
 
-unsigned loadImageToTexture(const char* filePath) {
+unsigned loadImageToTexture(const char* filePath, bool flipImage) {
     int TextureWidth;
     int TextureHeight;
     int TextureChannels;
@@ -105,8 +105,9 @@ unsigned loadImageToTexture(const char* filePath) {
     if (ImageData != NULL)
     {
         //Slike se osnovno ucitavaju naopako pa se moraju ispraviti da budu uspravne
-        // stbi__vertical_flip(ImageData, TextureWidth, TextureHeight, TextureChannels);
-
+        if (flipImage) {
+            stbi__vertical_flip(ImageData, TextureWidth, TextureHeight, TextureChannels);
+        }
         // Provjerava koji je format boja ucitane slike
         GLint InternalFormat = -1;
         switch (TextureChannels) {
@@ -164,8 +165,8 @@ GLFWcursor* loadImageToCursor(const char* filePath) {
     }
 }
 
-void preprocessTexture(unsigned& texture, const char* filepath) {
-    texture = loadImageToTexture(filepath);
+void preprocessTexture(unsigned& texture, const char* filepath, bool flipImage) {
+    texture = loadImageToTexture(filepath, flipImage);
     glBindTexture(GL_TEXTURE_2D, texture);
 
     glGenerateMipmap(GL_TEXTURE_2D);

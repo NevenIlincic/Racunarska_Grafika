@@ -7,6 +7,7 @@
 #include "../DarkRect.cpp"
 #include "../Door.cpp"
 #include "../Watermark.cpp"
+#include "../PersonManager.cpp"
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
 // Projekat je dozvoljeno pisati počevši od ovog kostura
@@ -24,39 +25,9 @@ Canvas canvas;
 DarkRect darkRect;
 Door door;
 Watermark watermark;
+PersonManager personManager;
 
 unsigned watermarkTexture;
-
-void drawWatermark(unsigned int watermarkShader, unsigned int VAOwatermark) {
-    glUseProgram(watermarkShader); // Podešavanje da se crta koristeći šejder za četvorougao
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, watermarkTexture);
-
-    glBindVertexArray(VAOwatermark); // Podešavanje da se crta koristeći vertekse četvorougla
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4); // Crtaju se trouglovi tako da formiraju četvorougao
-}
-
-
-void formVAOs(float* verticesWatermark, size_t watermarkSize, unsigned int& VAOwatermark) {
-    unsigned int VBOrect;
-    glGenVertexArrays(1, &VAOwatermark);
-    glGenBuffers(1, &VBOrect);
-
-    glBindVertexArray(VAOwatermark);
-    glBindBuffer(GL_ARRAY_BUFFER, VBOrect);
-    glBufferData(GL_ARRAY_BUFFER, watermarkSize, verticesWatermark, GL_STATIC_DRAW);
-
-    // Atribut 0 (pozicija):
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
-        4 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
-        4 * sizeof(float), (void*)(2 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-
-}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -128,6 +99,7 @@ int main()
     darkRect = DarkRect(rectShader);
     door = Door(rectShader);
     watermark = Watermark(textureShader);
+    personManager = PersonManager(textureShader);
 
 
     glfwSetKeyCallback(window, key_callback);
@@ -147,6 +119,7 @@ int main()
         canvas.draw();
         darkRect.draw();
         watermark.draw();
+        personManager.draw();
        
 
         glfwSwapBuffers(window);
@@ -156,7 +129,7 @@ int main()
     }
 
     glDeleteProgram(rectShader);
-    //glDeleteProgram(colorShader);
+    glDeleteProgram(textureShader);
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;

@@ -129,6 +129,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DoorState.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="PersonManager.cpp" />
     <ClCompile Include="Seat.cpp" />
     <ClCompile Include="SeatsManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
