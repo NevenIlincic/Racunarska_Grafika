@@ -150,7 +150,7 @@ public:
         }
     }
 
-    void fillUsedSeats() {
+    std::vector<Seat> fillUsedSeats() {
         usedSeats.clear();
         for (size_t i = 0; i < seats.size(); i++) {
             Seat seat = seats[i];
@@ -158,6 +158,8 @@ public:
                 usedSeats.push_back(seat);
             }
         }
+
+        return usedSeats;
     }
 
 };

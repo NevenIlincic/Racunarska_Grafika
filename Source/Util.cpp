@@ -1,9 +1,10 @@
-#include "../Header/Util.h";
+Ôªø#include "../Header/Util.h";
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <random>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "../Header/stb_image.h"
@@ -149,7 +150,7 @@ GLFWcursor* loadImageToCursor(const char* filePath) {
         image.height = TextureHeight;
         image.pixels = ImageData;
 
-        // Tacka na povröini slike kursora koja se ponaöa kao hitboks, moze se menjati po potrebi
+        // Tacka na povr—ôini slike kursora koja se pona—ôa kao hitboks, moze se menjati po potrebi
         // Trenutno je gornji levi ugao, odnosno na 20% visine i 20% sirine slike kursora
         int hotspotX = TextureWidth / 5;
         int hotspotY = TextureHeight / 5;
@@ -176,4 +177,12 @@ void preprocessTexture(unsigned& texture, const char* filepath, bool flipImage) 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+int generate_random_number(int min, int max) {
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<> distrib(min, max);
+
+    return distrib(generator);
 }

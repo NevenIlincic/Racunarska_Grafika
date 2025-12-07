@@ -55,6 +55,10 @@ public:
         glActiveTexture(GL_TEXTURE0);
         glUniform1i(glGetUniformLocation(shaderTextureProgram, "uTex"), 0);
         glUniform1f(glGetUniformLocation(shaderTextureProgram, "uAlpha"), 0.5f);
+        glUniform1f(glGetUniformLocation(shaderTextureProgram, "uX"), 0.0f);
+        glUniform1f(glGetUniformLocation(shaderTextureProgram, "uY"), 0.0f);
+        glUniform1f(glGetUniformLocation(shaderTextureProgram, "uSx"), 1.0f);
+        glUniform1f(glGetUniformLocation(shaderTextureProgram, "uSy"), 1.0f);
         glBindTexture(GL_TEXTURE_2D, watermarkTexture);
 
 

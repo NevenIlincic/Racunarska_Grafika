@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <random>
 
 #define _USE_MATH_DEFINES
 #include <cmath> // za pi
@@ -13,27 +14,43 @@
 class PersonManager {
 public:
 	std::vector<Person> people;
+    std::vector<Person> spawnedPeople;
 	unsigned int VAO, VBO;     // zajednički VAO/VBO
 	unsigned int shaderTextureProgram;
-    Person man;
-
     unsigned personTexture;
+    unsigned sittingPersonTexture;
+
+    float timerInterval;
+
+    double startTime;
+
+    int spawningIndex;
+    int numPeopleToSpawn;
+
+    bool isTimeToSpawnPeople;
+    bool isMovieFinished;
+    
 
 	PersonManager() {};
 
 
-	PersonManager(unsigned int shader): shaderTextureProgram(shader) {
+	PersonManager(unsigned int shader): shaderTextureProgram(shader), isTimeToSpawnPeople(false) {
         preprocessTexture(personTexture, "Resources/stickman.png", true);
+        preprocessTexture(sittingPersonTexture, "Resources/sitting_stickman.png", true);
+
+        timerInterval = 0.5f;
+        startTime = 0.0f;
+        spawningIndex = 0;
+        numPeopleToSpawn = 0;
+        isMovieFinished = false;
 
         float quadVertices[] = {
-            //  X,       Y,       U,     V
-            -1.0f,  1.0f,    0.0f, 1.0f, // Gornje levo teme (u gornjem levom uglu prozora)
-            -1.0f,  0.8f,    0.0f, 0.0f, // Donje levo teme
-            -0.9f,  0.8f,    1.0f, 0.0f, // Donje desno teme
-            -0.9f,  1.0f,    1.0f, 1.0f  // Gornje desno teme
+            //  X (Lokalni), Y (Lokalni), U,     V
+                 0.0f,       0.0f,    0.0f, 1.0f, // Gornje levo (GL): (0.0, 0.0) -> Pocinje na (uX, uY)
+                 0.0f,      -0.2f,    0.0f, 0.0f, // Donje levo (DL): (0.0, -0.2)
+                 0.1f,      -0.2f,    1.0f, 0.0f, // Donje desno (DR): (0.1, -0.2)
+                 0.1f,       0.0f,    1.0f, 1.0f  // Gornje desno (GR): (0.1, 0.0)
         };
-
-        man = Person(0.0f, 0.0f, 50.0f, 100.0f);
 
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
@@ -54,17 +71,77 @@ public:
     };
 
     void draw() {
-        glUseProgram(shaderTextureProgram);
+        if (isTimeToSpawnPeople) {
+            if (canSpawnPerson()) {
+                spawnPerson();
+            }
+            for (Person& person : spawnedPeople) {
+                person.move();
+                glUseProgram(shaderTextureProgram);
+                glActiveTexture(GL_TEXTURE1);
+                glUniform1i(glGetUniformLocation(shaderTextureProgram, "uTex"), 1);
+                glUniform1f(glGetUniformLocation(shaderTextureProgram, "uAlpha"), 1.0f);
+             
+                if (person.isSitting) {
+                    glBindTexture(GL_TEXTURE_2D, sittingPersonTexture);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uSx"), 0.4f);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uSy"), 0.4f);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uX"), person.x + 0.03f);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uY"), person.y - 0.26f);
 
-        glActiveTexture(GL_TEXTURE0);
-        glUniform1i(glGetUniformLocation(shaderTextureProgram, "uTex"), 0);
-        glUniform1f(glGetUniformLocation(shaderTextureProgram, "uAlpha"), 1.0f);
-        glBindTexture(GL_TEXTURE_2D, personTexture);
+                    if (isMovieFinished) {
+                        person.finishedWatching = true;
+                        person.isSitting = false;
+                    }
+                }
+                else {
+                    glBindTexture(GL_TEXTURE_2D, personTexture);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uSx"), 1.0f);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uSy"), 1.0f);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uX"), person.x);
+                    glUniform1f(glGetUniformLocation(shaderTextureProgram, "uY"), person.y);
+                    cleanupPeople();
+                }
 
+                glBindVertexArray(VAO);
+                glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+                glBindVertexArray(0);
 
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-        glBindVertexArray(0);
+            }
+        }
     }
 
+    void arrangePeople(std::vector<Seat> usedSeats) {
+        for (Seat& seat : usedSeats) {
+            Person person = Person(-1.0f, 1.0f, seat.x - 0.05f, seat.y);
+            people.push_back(person);
+        }
+
+        numPeopleToSpawn = generate_random_number(1, usedSeats.size());
+
+    }
+
+    void spawnPerson() {
+        if (spawningIndex < numPeopleToSpawn) {
+            spawnedPeople.push_back(people[spawningIndex]);
+            spawningIndex++;
+        }
+    }
+
+    bool canSpawnPerson() {
+        if (glfwGetTime() - this->startTime > this->timerInterval) {
+            this->startTime = glfwGetTime();
+            return true;
+        }
+        return false;
+    }
+
+    void cleanupPeople() {
+        spawnedPeople.erase(
+            std::remove_if(spawnedPeople.begin(), spawnedPeople.end(), [](const Person& person) {
+                return person.hasExited;
+                }),
+            spawnedPeople.end()
+        );
+    }
 };

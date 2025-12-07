@@ -83,5 +83,8 @@
     <Image Include="Resources\watermark.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\sitting_stickman.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

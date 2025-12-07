@@ -20,6 +20,8 @@ int screenHeight = 800;
 float uX = 0.0f;
 float uY = 0.0f;
 
+bool hasMovieStarted = false;
+
 SeatsManager seatsManager;
 Canvas canvas;
 DarkRect darkRect;
@@ -35,6 +37,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, true);
     }
 
+    if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
+        personManager.isMovieFinished = true;
+    }
+
     if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9 && action == GLFW_PRESS) {
         int numSeats = key - GLFW_KEY_0;
         std::cout << numSeats << std::endl;
@@ -42,9 +48,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
-        darkRect.changeTransparency();
-        seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
-        door.openCloseDoor();
+        if (!hasMovieStarted) {
+            hasMovieStarted = true;
+            darkRect.changeTransparency();
+            seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
+            door.openCloseDoor();
+            std::vector<Seat> usedSeats = seatsManager.fillUsedSeats();
+            personManager.arrangePeople(usedSeats);
+            personManager.isTimeToSpawnPeople = true;
+        }
     }
 }
 
