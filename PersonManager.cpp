@@ -123,6 +123,9 @@ public:
             Person person = Person(-1.0f, 1.0f, seat.x - 0.05f, seat.y);
             people.push_back(person);
         }
+        std::random_device rd;
+        std::mt19937 g(rd());
+        std::shuffle(people.begin(), people.end(), g);
 
         numPeopleToSpawn = generate_random_number(1, usedSeats.size());
 
