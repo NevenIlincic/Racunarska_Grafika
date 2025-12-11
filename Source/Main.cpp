@@ -32,15 +32,12 @@ PersonManager personManager;
 unsigned watermarkTexture;
 
 bool canStartMovie = true;
+bool canLetPeopleIn = true;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
-    }
-
-    if (key == GLFW_KEY_Q && action == GLFW_PRESS) {
-        personManager.isMovieFinished = true;
     }
 
     if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9 && action == GLFW_PRESS) {
@@ -49,13 +46,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 
     if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
-        if (!canvas.hasMovieStarted) {
+        if (!canvas.hasMovieStarted && canLetPeopleIn && !seatsManager.fillUsedSeats().empty()) {
             darkRect.changeTransparency();
             seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
             door.openDoor();
             std::vector<Seat> usedSeats = seatsManager.fillUsedSeats();
             personManager.arrangePeople(usedSeats);
             personManager.isTimeToSpawnPeople = true;
+            canLetPeopleIn = false;
         }
     }
 }
@@ -88,6 +86,7 @@ void checkForSceneReset() {
         personManager.resetManager();
         canvas.resetCanvas();
         canStartMovie = true;
+        canLetPeopleIn = true;
 
     }
 }
@@ -96,6 +95,10 @@ void checkForMovieFinish() {
     if (canvas.isMovieFinished) {
         personManager.isMovieFinished = true;
         door.openDoor();
+    }
+
+    if (personManager.allPeopleLeft) {
+        canLetPeopleIn = true;
     }
 
 
