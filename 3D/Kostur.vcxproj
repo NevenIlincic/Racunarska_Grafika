@@ -137,6 +137,7 @@
     <ClCompile Include="Source\Util.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="VAOs.cpp" />
+    <ClCompile Include="Walls.cpp" />
     <ClCompile Include="Watermark.cpp" />
   </ItemGroup>
   <ItemGroup>
