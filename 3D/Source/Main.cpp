@@ -8,7 +8,7 @@
 #include "../Door.cpp"
 #include "../Watermark.cpp"
 #include "../PersonManager.cpp"
-#include "../Camera.cpp"
+//#include "../Camera.cpp"
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
 // Projekat je dozvoljeno pisati počevši od ovog kostura
@@ -41,29 +41,28 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
-    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
     {
-        glEnable(GL_DEPTH_TEST); //Ukljucivanje testiranja Z bafera
+        if (glIsEnabled(GL_DEPTH_TEST)){ glDisable(GL_DEPTH_TEST); }
+        else {
+            glEnable(GL_DEPTH_TEST);
+        }
     }
-    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+ 
+    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
     {
-        glDisable(GL_DEPTH_TEST);
-    }
-    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
-    {
-        glEnable(GL_CULL_FACE);
-    }
-    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
-    {
-        glDisable(GL_CULL_FACE);
+        if (glIsEnabled(GL_CULL_FACE)) { glDisable(GL_CULL_FACE); }
+        else {
+            glEnable(GL_CULL_FACE);
+        }
     }
 
-   /* if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9 && action == GLFW_PRESS) {
+    if (key >= GLFW_KEY_1 && key <= GLFW_KEY_9 && action == GLFW_PRESS) {
         int numSeats = key - GLFW_KEY_0;
         seatsManager.buySeats(numSeats);
     }
 
-    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
+  /*  if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
         if (!canvas.hasMovieStarted && canLetPeopleIn && !seatsManager.fillUsedSeats().empty()) {
             darkRect.changeTransparency();
             seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
@@ -98,14 +97,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
     {
-        double mouseX, mouseY;
-        glfwGetCursorPos(window, &mouseX, &mouseY);
-
-        // Pretvori u OpenGL koordinatni sistem [-1,1]
-        float normX = (mouseX / screenWidth) * 2.0f - 1.0f;
-        float normY = 1.0f - (mouseY / screenHeight) * 2.0f;
-
-        seatsManager.reserve(normX, normY); // pozovi metodu SeatsManager-a
+        seatsManager.reserve(camera); // pozovi metodu SeatsManager-a
     }
 }
 
@@ -168,71 +160,7 @@ int main()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glClearColor(0.5, 0.5, 0.5, 1.0);
-    float vertices[] =
-    {
-        //X    Y    Z      R    G    B    A         S   T
-          // Prednja strana (1)
-          0.1, 0.1, 0.1,   1.0, 0.0, 0.0, 1.0,      0,  0,    0, 0, 1,
-         -0.1, 0.1, 0.1,   1.0, 0.0, 0.0, 1.0,      1,  0,    0, 0, 1,
-         -0.1,-0.1, 0.1,   1.0, 0.0, 0.0, 1.0,      1,  1,    0, 0, 1,
-          0.1,-0.1, 0.1,   1.0, 0.0, 0.0, 1.0,      0,  1,    0, 0, 1,
-
-          // Leva strana (2)
-         -0.1, 0.1, 0.1,   0.0, 0.0, 1.0, 1.0,      0,  0,    -1, 0, 0,
-         -0.1, 0.1,-0.1,   0.0, 0.0, 1.0, 1.0,      1,  0,    -1, 0, 0,
-         -0.1,-0.1,-0.1,   0.0, 0.0, 1.0, 1.0,      1,  1,    -1, 0, 0,
-         -0.1,-0.1, 0.1,   0.0, 0.0, 1.0, 1.0,      0,  1,    -1, 0, 0,
-
-         // Donja strana (3)
-         0.1,-0.1, 0.1,   1.0, 1.0, 1.0, 1.0,      0,  0,    0, -1, 0,
-        -0.1,-0.1, 0.1,   1.0, 1.0, 1.0, 1.0,      1,  0,    0, -1, 0,
-        -0.1,-0.1,-0.1,   1.0, 1.0, 1.0, 1.0,      1,  1,    0, -1, 0,
-         0.1,-0.1,-0.1,   1.0, 1.0, 1.0, 1.0,      0,  1,    0, -1, 0,
-
-         // Gornja strana (4)
-         0.1, 0.1, 0.1,   1.0, 1.0, 0.0, 1.0,      0,  0,    0, 1, 0,
-         0.1, 0.1,-0.1,   1.0, 1.0, 0.0, 1.0,      1,  0,    0, 1, 0,
-        -0.1, 0.1,-0.1,   1.0, 1.0, 0.0, 1.0,      1,  1,    0, 1, 0,
-        -0.1, 0.1, 0.1,   1.0, 1.0, 0.0, 1.0,      0,  1,    0, 1, 0,
-
-        // Desna strana (5)
-        0.1, 0.1, 0.1,   0.0, 1.0, 0.0, 1.0,      0,  0,    1, 0, 0,
-        0.1,-0.1, 0.1,   0.0, 1.0, 0.0, 1.0,      1,  0,    1, 0, 0,
-        0.1,-0.1,-0.1,   0.0, 1.0, 0.0, 1.0,      1,  1,    1, 0, 0,
-        0.1, 0.1,-0.1,   0.0, 1.0, 0.0, 1.0,      0,  1,    1, 0, 0,
-
-        // Zadnja strana (6)
-        0.1, 0.1,-0.1,   1.0, 0.5, 0.0, 1.0,      0,  0,    0, 0, -1,
-        0.1,-0.1,-0.1,   1.0, 0.5, 0.0, 1.0,      1,  0,    0, 0, -1,
-       -0.1,-0.1,-0.1,   1.0, 0.5, 0.0, 1.0,      1,  1,    0, 0, -1,
-       -0.1, 0.1,-0.1,   1.0, 0.5, 0.0, 1.0,      0,  1,    0, 0, -1,
-    };
-    unsigned int stride = (3 + 4 + 2 + 3) * sizeof(float);
-
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(7 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
-    glEnableVertexAttribArray(3);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-
-
-
+   
     unsigned int unifiedShader = createShader("basic.vert", "basic.frag");
     glUseProgram(unifiedShader);
     glUniform1i(glGetUniformLocation(unifiedShader, "uTex"), 0);
@@ -247,8 +175,8 @@ int main()
     glm::mat4 projectionO = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f); //Matrica ortogonalne projekcije (Lijeva, desna, donja, gornja, prednja i zadnja ravan)
      
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projectionP));
-    camera = Camera(glm::vec3(0.0f, 0.0f, 2.0f), unifiedShader);
-   // seatsManager = SeatsManager(rectShader); // koristimo isti shader za sedišta
+    camera = Camera(glm::vec3(-0.25f, 0.5f, 0.5f), unifiedShader);
+    seatsManager = SeatsManager(5, 10, unifiedShader); // koristimo isti shader za sedišta
  /*   canvas = Canvas(rectShader);
     darkRect = DarkRect(rectShader);
     door = Door(rectShader);*/
@@ -266,23 +194,14 @@ int main()
     {
         double initFrameTime = glfwGetTime();
         glUseProgram(unifiedShader);
-
+      
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         camera.updateShader(projectionP);
         camera.proccessKeyInputs(window);
 
-        glm::mat4 model = glm::mat4(1.0f);
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-        glBindVertexArray(VAO);
-        // Tvoja kocka ima 6 strana, svaka je Triangle Fan od 4 temena
-        for (int i = 0; i < 6; i++) {
-            glDrawArrays(GL_TRIANGLE_FAN, i * 4, 4);
-        }
-        glBindVertexArray(0);
        // door.draw();
-       // seatsManager.draw(); // Iscrtavanje sedista
+        seatsManager.draw(); // Iscrtavanje sedista
         //canvas.draw();
         //darkRect.draw();
         watermark.draw();

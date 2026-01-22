@@ -9,8 +9,8 @@ public:
 	State state;
 	int row, column;
 
-	Seat(float _x, float _y, int _row, int _column)
-		: x(_x), y(_y), row(_row), column(_column), r(0.0f), g(0.0f), b(1.0f), state(State::Free) {
+	Seat(float _x, float _y, float _z, int _row, int _column)
+		: x(_x), y(_y), z(_z), row(_row), column(_column), r(0.0f), g(0.0f), b(1.0f), state(State::Free) {
 	};
 
 	void reserveSeat() {

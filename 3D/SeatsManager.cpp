@@ -8,6 +8,11 @@
 #include <algorithm> // za max()
 #include <iostream>
 #include "Seat.cpp"
+#include "Camera.cpp"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 class SeatsManager {
 public:
@@ -19,27 +24,37 @@ public:
     float seatSize;
 
     int takenSeats;
+    int firstFreeSeatIndex;
+
+    float stepHeight;
+
+    int rows, cols;
 
     SeatsManager() {};
 
-    SeatsManager(unsigned int shader) : shaderProgram(shader) {
+    SeatsManager(int _rows, int _cols, unsigned int shader) : rows(_rows), cols(_cols), shaderProgram(shader) {
         // Primer: 5x10 sedišta
-        int rows = 5;
-        int cols = 10;
         float spacingX = 0.15f;
         float spacingY = 0.3f;
-        seatSize = 0.1f;
+        seatSize = 0.6f;
 
         canManipulateSeats = true;
 
         takenSeats = 0;
-       
 
-       /* for (int i = rows - 1; i >= 0; i--) {
-            for (int j = 0; j < cols; j++) {
-                seats.push_back(Seat(j * spacingX - 0.6f, i * spacingY - 0.4f, i, j));
+        stepHeight = 0.05f;
+
+        float spacingZ = 0.3f;
+        float stepHeight = 0.1f;
+
+        for (int i = 0; i < this->rows; i++) {
+            for (int j = 0; j < this->cols; j++) {
+                float posX = j * spacingX - 1.0f;
+                float posY = i * stepHeight;
+                float posZ = -i * spacingZ;
+                seats.push_back(Seat(posX, posY, posZ, i, j));
             }
-        }*/
+        }
 
         // Kreiranje jednog VAO/VBO za kvadrat
         float vertices[] =
@@ -83,11 +98,9 @@ public:
         };
         unsigned int stride = (3 + 4 + 2 + 3) * sizeof(float);
 
-        unsigned int VAO;
         glGenVertexArrays(1, &VAO);
         glBindVertexArray(VAO);
 
-        unsigned int VBO;
         glGenBuffers(1, &VBO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -98,8 +111,8 @@ public:
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(7 * sizeof(float)));
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, stride, (void*)(10 * sizeof(float)));
-        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
+        glEnableVertexAttribArray(3);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
@@ -108,43 +121,53 @@ public:
     // Crtanje svih sedišta
     void draw() {
         glUseProgram(shaderProgram);
+        glUniform1i(glGetUniformLocation(shaderProgram, "uTex"), 0);
         glBindVertexArray(VAO);
 
-        for (Seat& seat : seats) {
-            glUniform3f(glGetUniformLocation(shaderProgram, "uColor"), seat.r, seat.g, seat.b);
-         
-            glUniform1f(glGetUniformLocation(shaderProgram, "uX"), seat.x);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uY"), seat.y - 0.3f);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uSx"), seatSize);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uSy"), seatSize);
-            glUniform1f(glGetUniformLocation(shaderProgram, "uAlpha"), 1.0f);
+        unsigned int modelLoc = glGetUniformLocation(shaderProgram, "uM");
+        unsigned int colorLocation = glGetUniformLocation(shaderProgram, "uColor");
+        glGetUniformLocation(shaderProgram, "uColor");
 
-            glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        for (Seat& seat : seats) {
+            // 1. Boja
+            glUniform3f(colorLocation, seat.r, seat.g, seat.b);
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(seat.x, seat.y, seat.z));
+            model = glm::scale(model, glm::vec3(seatSize, seatSize, seatSize));
+
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+            for (int i = 0; i < 6; i++) {
+                glDrawArrays(GL_TRIANGLE_FAN, i * 4, 4);
+            }
         }
 
         glBindVertexArray(0);
     }
 
-    // Promena stanja sedišta po koordinatama klika
-    void reserve(float mouseX, float mouseY) {
-        float halfSize = seatSize / 2.0f;
-        if (canManipulateSeats) {
-            for (Seat& seat : seats) {
-
-                if (mouseX >= seat.x - halfSize && mouseX <= seat.x + halfSize &&
-                    mouseY >= seat.y - halfSize - 0.3f && mouseY <= seat.y - 0.3f + halfSize) {
-                    seat.reserveSeat();
-
-                    if (seat.state == State::Free) {
-                        takenSeats--;
-                    }
-                    else {
-                        takenSeats++;
-                    }
-                    break;
-                }
+    void reserve(Camera& camera) {
+        for (Seat& seat : this->seats) {
+            if (this->isCameraLookingAt(camera, seat, 0.35f)) {
+                seat.reserveSeat(); // Rezerviši samo ono što gledaš i što je blizu
+                break;
             }
         }
+    }
+
+    bool isCameraLookingAt(Camera& cam, Seat& seat, float maxDistance) {
+        glm::vec3 seatPos = glm::vec3(seat.x, seat.y, seat.z);
+
+        // 1. Izračunaj stvarnu udaljenost između kamere i sedišta
+        float dist = glm::distance(cam.position, seatPos);
+
+        if (dist > maxDistance) { //Ako je predaleko kamera, ne moze se rezervisati
+            return false;
+        }
+
+        glm::vec3 toSeat = glm::normalize(seatPos - cam.position);
+        float cosAngle = glm::dot(cam.front, toSeat);
+
+        return cosAngle > 0.98f;
     }
 
     void buySeats(int numSeats) {
@@ -152,48 +175,45 @@ public:
             return;
         }
         bool canTakeSeats = false;
-        int startingSeatIndex = seats.size() - 1;
         int checkedFreeSeats = 0;
+        int startingSeatIndex = seats.size() - 1;
+        int numSeatsLeftToCheck = numSeats;
 
         if (this->canManipulateSeats) {
-            //Provera da li postoji numSeats uzastopnih sedista
             for (int i = seats.size() - 1; i >= 0; i--) {
-                Seat& startingSeat = seats[i];
-                if (startingSeat.state == State::Free) {
-                    startingSeatIndex = i;
-                    checkedFreeSeats++;
-                    for (int z = 1; z < numSeats; z++) {
-                        if (i - z < 0) {
-                            checkedFreeSeats = 0;
-                            break;
-                        }
-                        Seat adjacentSeat = seats[i - z];
-                        if (adjacentSeat.state != State::Free) {
-                            checkedFreeSeats = 0;
-                            break;
-                        }
-                        checkedFreeSeats++;
+                if (i - (numSeats - 1) < 0) { break; }
+
+                Seat currentSeat = seats[i];
+                if (currentSeat.state != State::Free) { continue; }
+
+                startingSeatIndex = i;
+
+                Seat lastSeat = seats[i - numSeats + 1];
+                if (currentSeat.row != lastSeat.row) {
+                    if (currentSeat.row - 1 < 0) { break; }
+                    i = (lastSeat.row * this->cols) + this->cols;
+                    continue;
+                }
+                for (int y = 0; y < numSeats; y++) {
+                    Seat checkingSeat = seats[i - y];
+                    if (checkingSeat.state != State::Free) { break; }
+                    if (y == numSeats - 1) {
+                        canTakeSeats = true;
                     }
-                }
 
-                //Ako potoji N uzastopnih sedista, moze da se kupuje
-                if (checkedFreeSeats == numSeats) {
-                    canTakeSeats = true;
-                    break;
                 }
-            }
-
-            //Kupovina sedista
-            if (canTakeSeats) {
-                for (int z = 0; z < numSeats; z++) {
-                    Seat& currentSeat = seats[startingSeatIndex - z];
-                    currentSeat.buySeat();
-                    takenSeats++;
-                }
+                if (canTakeSeats) { break; }
             }
         }
+        if (canTakeSeats) {
+            for (int z = 0; z < numSeats; z++) {
+                Seat& currentSeat = seats[startingSeatIndex - z];
+                currentSeat.buySeat();
+                takenSeats++;
+            }
+        }
+       
     }
-
     std::vector<Seat> fillUsedSeats() {
         usedSeats.clear();
         for (size_t i = 0; i < seats.size(); i++) {
@@ -213,5 +233,4 @@ public:
             seat.resetSeat();
         }
     }
-
 };
