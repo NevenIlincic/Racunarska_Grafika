@@ -1,101 +1,75 @@
-﻿  Main.cpp
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(64,15): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(64,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(64,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(65,14): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(65,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(65,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(66,14): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(66,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(66,25): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
+﻿  FloorManager.cpp
+  Main.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(67,15): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(67,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(67,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(67,25): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(70,14): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(68,14): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(70,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(68,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(68,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(69,14): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(69,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(69,25): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(70,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(70,19): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(70,25): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(71,14): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(71,20): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(71,24): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(72,14): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(72,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(72,24): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(73,14): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(73,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(73,20): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(73,25): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(74,14): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(74,20): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(74,24): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(75,14): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(75,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(75,24): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(76,14): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(76,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(76,19): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(76,24): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(77,13): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(77,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(77,24): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(78,13): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(78,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(78,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(76,25): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(79,14): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -104,37 +78,37 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(79,18): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(79,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(79,24): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(80,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(80,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(80,24): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(81,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(81,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(81,23): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(82,14): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(82,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(82,18): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(82,24): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(82,23): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(83,14): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(83,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(83,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(84,13): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(84,19): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(84,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(85,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(85,14): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(85,19): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -143,31 +117,31 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(85,24): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(86,14): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(86,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(86,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(87,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(87,19): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(87,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(88,13): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(88,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(88,19): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(88,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(89,13): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(89,17): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(89,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(90,13): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(90,17): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(90,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(88,24): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(91,13): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -176,7 +150,25 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(91,18): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(91,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(91,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(92,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(92,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(92,23): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(93,13): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(93,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(93,22): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(94,13): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -188,25 +180,7 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(94,22): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(95,13): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(95,17): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(95,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(96,12): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(96,17): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(96,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Source/Main.cpp')
-  
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(97,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(97,13): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(97,18): warning C4305: 'initializing': truncation from 'double' to 'float'
@@ -215,21 +189,47 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(97,22): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(179,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(98,13): warning C4305: 'initializing': truncation from 'double' to 'float'
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(183,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(98,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(98,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(99,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(99,17): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(99,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(100,12): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(100,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(100,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(182,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Source/Main.cpp')
+  
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\SeatsManager.cpp(186,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\PersonManager.cpp(130,68): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'Source/Main.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(83,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(84,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(88,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(89,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(91,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(92,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Walls.cpp
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(85,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(86,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(90,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(91,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(93,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\Source\Main.cpp(94,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Generating Code...
   Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\x64\Debug\Kostur.exe

@@ -129,6 +129,8 @@
     <ClCompile Include="DarkRect.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DoorState.cpp" />
+    <ClCompile Include="FloorManager.cpp" />
+    <ClCompile Include="TileHorizontal.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="PersonManager.cpp" />
     <ClCompile Include="Seat.cpp" />
@@ -137,6 +139,7 @@
     <ClCompile Include="Source\Util.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="VAOs.cpp" />
+    <ClCompile Include="TileVertical.cpp" />
     <ClCompile Include="Walls.cpp" />
     <ClCompile Include="Watermark.cpp" />
   </ItemGroup>

@@ -9,6 +9,7 @@
 #include "../Watermark.cpp"
 #include "../PersonManager.cpp"
 #include "../Walls.cpp"
+#include "../FloorManager.cpp"
 //#include "../Camera.cpp"
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
@@ -32,6 +33,7 @@ Door door;
 Watermark watermark;
 PersonManager personManager;
 Walls walls;
+FloorManager floorManager;
 
 unsigned watermarkTexture;
 
@@ -177,9 +179,11 @@ int main()
     glm::mat4 projectionO = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f); //Matrica ortogonalne projekcije (Lijeva, desna, donja, gornja, prednja i zadnja ravan)
      
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projectionP));
+
     camera = Camera(glm::vec3(-0.25f, 0.5f, 0.5f), unifiedShader);
     seatsManager = SeatsManager(5, 10, unifiedShader); // koristimo isti shader za sedišta
     walls = Walls(unifiedShader);
+    floorManager = FloorManager(unifiedShader);
 
  /*   canvas = Canvas(rectShader);
     darkRect = DarkRect(rectShader);
@@ -209,6 +213,7 @@ int main()
         seatsManager.draw(); // Iscrtavanje sedista
         //canvas.draw();
         //darkRect.draw();
+        floorManager.draw();
         watermark.draw();
         //personManager.draw();
 

@@ -42,17 +42,20 @@ public:
 
         takenSeats = 0;
 
-        stepHeight = 0.05f;
+        stepHeight = 0.1f;
 
         float spacingZ = 0.3f;
-        float stepHeight = 0.1f;
+        
+
+        float offsetZ = -0.06f;
+        float offsetY = 0.06f;
 
         for (int i = 0; i < this->rows; i++) {
             for (int j = 0; j < this->cols; j++) {
                 float posX = j * spacingX - 1.0f;
                 float posY = i * stepHeight;
                 float posZ = -i * spacingZ;
-                seats.push_back(Seat(posX, posY, posZ, i, j));
+                seats.push_back(Seat(posX, posY + offsetY, posZ, i, j));
             }
         }
 
