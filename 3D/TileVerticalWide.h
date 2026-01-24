@@ -21,11 +21,11 @@ public:
     bool isNormalTowardsPositive;
 
     unsigned int VAO, VBO;
-    unsigned int shaderProgram;
+    Shader shaderProgram;
 
     TileVerticalWide();
 
-    TileVerticalWide(unsigned int shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _width, float _height, std::vector<float> color, bool _isNormalTowardsPositive);
+    TileVerticalWide(Shader _shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _width, float _height, std::vector<float> color, bool _isNormalTowardsPositive);
 
     void draw();
 

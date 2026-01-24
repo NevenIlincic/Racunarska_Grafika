@@ -3,7 +3,7 @@
 
 Camera::Camera(){}
 
-Camera::Camera(glm::vec3 cameraPosition, unsigned int shader): position(cameraPosition), shaderProgram(shader) {
+Camera::Camera(glm::vec3 cameraPosition, Shader _shader): position(cameraPosition), shaderProgram(_shader) {
     this->front = glm::vec3(0.0f, 0.0f, -2.0f);
     this->up = glm::vec3(0.0f, 1.0f, 0.0f);
     this->yaw = -90.0f; // Početni ugao gledanja
@@ -14,8 +14,10 @@ Camera::Camera(glm::vec3 cameraPosition, unsigned int shader): position(cameraPo
     this->cameraSpeed = 0.01f;
     this->firstMouse = true;
        
-    this->viewLocation = glGetUniformLocation(shader, "uV");
-    this->projectionLocation = glGetUniformLocation(shader, "uP");
+   /* this->viewLocation = glGetUniformLocation(shader, "uV");
+    this->projectionLocation = glGetUniformLocation(shader, "uP");*/
+    this->viewLocation = this->shaderProgram.getUniformLocation("uV");
+    this->projectionLocation = this->shaderProgram.getUniformLocation("uP");
 }
 
 void Camera::processMouseMovement(float xoffset, float yoffset) {
@@ -52,9 +54,11 @@ void Camera::proccessKeyInputs(GLFWwindow* window) {
     }
 }
 
-void Camera::sendToShader(unsigned int shaderProgram, const std::string& viewName, const std::string& projName, glm::mat4 projectionMatrix) {
-    unsigned int viewLoc = glGetUniformLocation(shaderProgram, viewName.c_str());
-    unsigned int projLoc = glGetUniformLocation(shaderProgram, projName.c_str());
+void Camera::sendToShader(const std::string& viewName, const std::string& projName, glm::mat4 projectionMatrix) {
+   /* unsigned int viewLoc = glGetUniformLocation(shaderProgram, viewName.c_str());
+    unsigned int projLoc = glGetUniformLocation(shaderProgram, projName.c_str());*/
+    unsigned int viewLoc = this->shaderProgram.getUniformLocation(viewName.c_str());
+    unsigned int projLoc = this->shaderProgram.getUniformLocation(projName.c_str());
 
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(getViewMatrix()));
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projectionMatrix));

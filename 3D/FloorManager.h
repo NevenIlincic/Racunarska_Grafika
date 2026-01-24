@@ -12,13 +12,13 @@ public:
   /*  std::vector<Tile> floorTilesVertical;*/
     float stepHeight;
 
-    unsigned int shaderProgram;
+    Shader shaderProgram;
 
     FloorManager();
 
     ~FloorManager();
 
-    FloorManager(unsigned int shader);
+    FloorManager(Shader shader);
 
     void draw();
 

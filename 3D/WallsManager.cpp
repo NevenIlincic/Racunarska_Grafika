@@ -19,7 +19,7 @@ WallsManager::~WallsManager() {
     this->wallTiles.clear();
 }
 
-WallsManager::WallsManager(unsigned int shader) : shaderProgram(shader) {
+WallsManager::WallsManager(Shader _shader) : shaderProgram(_shader) {
     std::vector<float> wallTileWideColor = { 0.35f, 0.35f, 0.35f };
     std::vector<float> wallTileElongatedColor = { 0.25f, 0.25f, 0.25f };
     std::vector<float> wallTileHorizontalColor = { 0.3f, 0.3f, 0.3f };

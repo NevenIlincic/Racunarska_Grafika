@@ -119,6 +119,15 @@
     <ClInclude Include="shader.hpp">
       <Filter>Source Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SeatsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -129,6 +138,18 @@
     <None Include="basic.vert" />
     <None Include="basic.frag" />
     <None Include="Resources\Door\Entrance_Door__vray.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\test\characterlowpoly2.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Door\door modern.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Door\Door.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\Door\Custom Front door.mtl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -155,6 +176,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Door\preview4.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\wood door0000.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\wood door0001.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\wood door0002.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

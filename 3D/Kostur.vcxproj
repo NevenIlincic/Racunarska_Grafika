@@ -148,11 +148,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="FloorManager.h" />
     <ClInclude Include="Header\stb_image.h" />
     <ClInclude Include="Header\Util.h" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model.hpp" />
+    <ClInclude Include="SeatsManager.h" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileHorizontal.h" />
@@ -167,7 +170,11 @@
     <None Include="packages.config" />
     <None Include="rect.frag" />
     <None Include="rect.vert" />
+    <None Include="Resources\Door\Custom Front door.mtl" />
+    <None Include="Resources\Door\door modern.mtl" />
+    <None Include="Resources\Door\Door.mtl" />
     <None Include="Resources\Door\Entrance_Door__vray.mtl" />
+    <None Include="Resources\test\characterlowpoly2.mtl" />
     <None Include="texture.frag" />
     <None Include="texture.vert" />
   </ItemGroup>
@@ -176,6 +183,9 @@
     <Image Include="Resources\Door\preview2.jpg" />
     <Image Include="Resources\Door\preview3.jpg" />
     <Image Include="Resources\Door\preview4.jpg" />
+    <Image Include="Resources\Door\wood door0000.png" />
+    <Image Include="Resources\Door\wood door0001.png" />
+    <Image Include="Resources\Door\wood door0002.png" />
     <Image Include="Resources\movie_camera.png" />
     <Image Include="Resources\sitting_stickman.png" />
     <Image Include="Resources\stickman.png" />

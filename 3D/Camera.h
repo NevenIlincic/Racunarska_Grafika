@@ -8,6 +8,8 @@
 #include <glm/gtc/type_ptr.hpp>         // Za glm::value_ptr
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "shader.hpp"
+
 class Camera {
 public:
     glm::vec3 position;
@@ -18,15 +20,16 @@ public:
     float yaw, pitch, sensitivity;
     float lastX, lastY, cameraSpeed;
     bool firstMouse;
-    unsigned int shaderProgram, viewLocation, projectionLocation;
+    Shader shaderProgram;
+    unsigned int viewLocation, projectionLocation;
 
     Camera();
-    Camera(glm::vec3 cameraPosition, unsigned int shader);
+    Camera(glm::vec3 _cameraPosition, Shader _shader);
 
     void processMouseMovement(float xoffset, float yoffset);
     void proccessKeyInputs(GLFWwindow* window);
     void updateShader(glm::mat4 projectionMatrix);
-    void sendToShader(unsigned int shaderProgram, const std::string& viewName, const std::string& projName, glm::mat4 projectionMatrix);
+    void sendToShader(const std::string& viewName, const std::string& projName, glm::mat4 projectionMatrix);
     void addWorldSpaceObject(WorldSpaceObject* object);
     glm::mat4 getViewMatrix();
 

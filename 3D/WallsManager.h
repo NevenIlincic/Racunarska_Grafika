@@ -2,19 +2,21 @@
 
 #include "WorldSpaceObject.h"
 #include "Tile.h"
+#include "shader.hpp"
 
 class WallsManager: public WorldSpaceObject {
 public:
     std::vector<Tile*> wallTiles;
 
     unsigned int VAO, VBO;
-    unsigned int shaderProgram;
+    /*unsigned int shaderProgram;*/
+    Shader shaderProgram;
 
     WallsManager();
 
     ~WallsManager();
 
-    WallsManager(unsigned int shader);
+    WallsManager(Shader _shader);
 
     void draw();
 

@@ -1,7 +1,7 @@
 ﻿#ifndef MODEL_H
 #define MODEL_H
 
-#include "../Header/stb_image.h"
+#include "Header/stb_image.h"
 
 #include <GL/glew.h> 
 
@@ -34,6 +34,8 @@ public:
     vector<Mesh>    meshes;
     string directory;
     bool gammaCorrection;
+
+    Model(){}
 
     // constructor, expects a filepath to a 3D model.
     Model(string const& path, bool gamma = false) : gammaCorrection(gamma)
@@ -113,7 +115,7 @@ private:
                 vertex.Normal = vector;
             }
             // texture coordinates
-            /*if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
+            if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
             {
                 glm::vec2 vec;
                 // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't 
@@ -124,7 +126,7 @@ private:
             }
             else
                 vertex.TexCoords = glm::vec2(0.0f, 0.0f);
-                */
+                
 
             vertices.push_back(vertex);
         }
@@ -190,7 +192,7 @@ private:
 
 
 
-unsigned int TextureFromFile(const char* path, const string& directory, bool gamma)
+inline unsigned int TextureFromFile(const char* path, const string& directory, bool gamma)
 {
     string filename = string(path);
     filename = directory + '/' + filename;

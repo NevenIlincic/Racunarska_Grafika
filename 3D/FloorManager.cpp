@@ -20,7 +20,7 @@ FloorManager::~FloorManager() {
     this->floorTiles.clear();
 }
 
-FloorManager::FloorManager(unsigned int shader) : shaderProgram(shader) {
+FloorManager::FloorManager(Shader _shader) : shaderProgram(_shader) {
     this->stepHeight = 0.1f;
     std::vector<float> downLeftVertex = { -1.2f, 0.0f, 1.0f };
     std::vector<float> roofDownLeftVertex = { -1.2f, 3.0f, 1.0f };
