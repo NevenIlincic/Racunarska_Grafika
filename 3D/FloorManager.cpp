@@ -31,7 +31,7 @@ FloorManager::FloorManager(unsigned int shader) : shaderProgram(shader) {
     //Floor tiles
     std::vector<float> normalVectorFloor = { 0.0f, 1.0f, 0.0f };
     std::vector<float> horizontalTileColor = { 0.2f, 0.2f, 0.2f };
-    TileHorizontal* floorTile = new TileHorizontal(this->shaderProgram, downLeftVertex, normalVectorFloor, floorTileWidth, 1.15f, horizontalTileColor);   //0.2f za Z razlika
+    TileHorizontal* floorTile = new TileHorizontal(this->shaderProgram, downLeftVertex, normalVectorFloor, floorTileWidth, 1.15f, horizontalTileColor, true);   //0.2f za Z razlika
     this->floorTiles.push_back(floorTile);
   
  
@@ -39,18 +39,19 @@ FloorManager::FloorManager(unsigned int shader) : shaderProgram(shader) {
     for (int i = 1; i < 6; i++) {
         std::vector<float> currentPos = { -1.2f, this->stepHeight * i, currentZ };
         if (i != 5) {
-            TileHorizontal* step = new TileHorizontal(this->shaderProgram, currentPos, normalVectorFloor, floorTileWidth, tileLength, horizontalTileColor);
+            TileHorizontal* step = new TileHorizontal(this->shaderProgram, currentPos, normalVectorFloor, floorTileWidth, tileLength, horizontalTileColor, true);
             this->floorTiles.push_back(step);
         }
         else {
-            TileHorizontal* step = new TileHorizontal(this->shaderProgram, currentPos, normalVectorFloor, floorTileWidth, tileLength + 0.4f, horizontalTileColor);
+            TileHorizontal* step = new TileHorizontal(this->shaderProgram, currentPos, normalVectorFloor, floorTileWidth, tileLength + 0.4f, horizontalTileColor, true);
             this->floorTiles.push_back(step);
         }
 
         std::vector<float> currentPosVertical = { -1.2f, this->stepHeight * (i-1), currentZ};
         std::vector<float> verticalTileNormal = { 0.0f, 0.0f, 1.0f };
         std::vector<float> verticalTileColor = { 0.3f, 0.3f, 0.3f };
-        TileVerticalWide* verticalTile = new TileVerticalWide(this->shaderProgram, currentPosVertical, verticalTileNormal, floorTileWidth, this->stepHeight, verticalTileColor);
+        bool isNormalTowardsPositive = true;
+        TileVerticalWide* verticalTile = new TileVerticalWide(this->shaderProgram, currentPosVertical, verticalTileNormal, floorTileWidth, this->stepHeight, verticalTileColor, isNormalTowardsPositive);
         this->floorTiles.push_back(verticalTile);
         currentZ -= tileLength;
     }

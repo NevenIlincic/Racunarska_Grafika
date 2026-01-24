@@ -108,43 +108,61 @@ public:
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
+        /*glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(7 * sizeof(float)));
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
-        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
+        glEnableVertexAttribArray(1);*/
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
+        glEnableVertexAttribArray(0);
+
+        // 1: NORMALE (X, Y, Z) - offset je 9 float-ova (3 pos + 4 col + 2 tex)
+        // Shader traži normale na lokaciji 1!
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        // 2: UV Koordinate (S, T) - offset je 7 float-ova (3 pos + 4 col)
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(7 * sizeof(float)));
+        glEnableVertexAttribArray(2);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
 
     // Crtanje svih sedišta
-    void draw() {
-        glUseProgram(shaderProgram);
-        glUniform1i(glGetUniformLocation(shaderProgram, "uTex"), 0);
+    void draw(Camera& camera, glm::mat4 projection) {
+        glUseProgram(shaderProgram); // unifiedShader
         glBindVertexArray(VAO);
 
+        // Uzimamo samo lokacije koje nam trebaju za materijal sedišta i model matricu
         unsigned int modelLoc = glGetUniformLocation(shaderProgram, "uM");
-        unsigned int colorLocation = glGetUniformLocation(shaderProgram, "uColor");
-        glGetUniformLocation(shaderProgram, "uColor");
+        unsigned int diffLoc = glGetUniformLocation(shaderProgram, "uMaterial.kD");
+        unsigned int ambLoc = glGetUniformLocation(shaderProgram, "uMaterial.kA");
+        unsigned int specLoc = glGetUniformLocation(shaderProgram, "uMaterial.kS");
+        unsigned int shineLoc = glGetUniformLocation(shaderProgram, "uMaterial.shine");
+
+        // Postavljamo zajednički sjaj za sva sedišta jednom
+        glUniform3f(specLoc, 0.1f, 0.1f, 0.1f);
+        glUniform1f(shineLoc, 32.0f);
 
         for (Seat& seat : seats) {
-            // 1. Boja
-            glUniform3f(colorLocation, seat.r, seat.g, seat.b);
+            // Boja konkretnog sedišta
+            glUniform3f(diffLoc, seat.r, seat.g, seat.b);
+            glUniform3f(ambLoc, seat.r, seat.g, seat.b);
+
+            // Pozicija konkretnog sedišta
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, glm::vec3(seat.x, seat.y, seat.z));
             model = glm::scale(model, glm::vec3(seatSize, seatSize, seatSize));
-
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
             for (int i = 0; i < 6; i++) {
                 glDrawArrays(GL_TRIANGLE_FAN, i * 4, 4);
             }
         }
-
         glBindVertexArray(0);
     }
 

@@ -11,6 +11,7 @@
 #include "../WallsManager.h"
 #include "../FloorManager.h"
 #include "../Camera.h"
+#include "../model.hpp"
 //#include "../Camera.cpp"
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
@@ -173,6 +174,7 @@ int main()
     unsigned int modelLoc = glGetUniformLocation(unifiedShader, "uM");
     unsigned int viewLoc = glGetUniformLocation(unifiedShader, "uV");
     unsigned int projLoc = glGetUniformLocation(unifiedShader, "uP");
+    unsigned int uViewPos = glGetUniformLocation(unifiedShader, "uViewPos");
 
     glm::mat4 projectionP = glm::perspective(glm::radians(90.0f), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f); //Matrica perspektivne projekcije (FOV, Aspect Ratio, prednja ravan, zadnja ravan)
     glm::mat4 projectionO = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 100.0f); //Matrica ortogonalne projekcije (Lijeva, desna, donja, gornja, prednja i zadnja ravan)
@@ -186,10 +188,11 @@ int main()
 
     camera.addWorldSpaceObject(&floorManager);
     camera.addWorldSpaceObject(&wallsManager);
- /*   canvas = Canvas(rectShader);
-    darkRect = DarkRect(rectShader);
-    door = Door(rectShader);*/
+    canvas = Canvas(unifiedShader, 1.5f, 1.25f);
+    /*darkRect = DarkRect(rectShader);*/
+    door = Door(unifiedShader, 0.25f, 0.5f);
     watermark = Watermark(textureShader);
+ /*   Model lija("res/test/characterlowpoly2.obj")*/
    // personManager = PersonManager(textureShader);
 
 
@@ -198,6 +201,23 @@ int main()
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
+    unsigned int lightPosLoc = glGetUniformLocation(unifiedShader, "uLight.pos");
+    unsigned int lightALoc = glGetUniformLocation(unifiedShader, "uLight.kA");
+    unsigned int lightDLoc = glGetUniformLocation(unifiedShader, "uLight.kD");
+    unsigned int lightSLoc = glGetUniformLocation(unifiedShader, "uLight.kS");
+
+    unsigned int materialShineLoc = glGetUniformLocation(unifiedShader, "uMaterial.shine");
+    unsigned int materialALoc = glGetUniformLocation(unifiedShader, "uMaterial.kA");
+    unsigned int materialDLoc = glGetUniformLocation(unifiedShader, "uMaterial.kD");
+    unsigned int materialSLoc = glGetUniformLocation(unifiedShader, "uMaterial.kS");
+
+    glUniform3f(lightPosLoc, -0.5f, 0.75f, 0.8f);
+    glUniform3f(lightALoc, 0.4, 0.4, 0.4);
+    glUniform3f(lightDLoc, 0.75f, 0.75f, 0.75f);
+    glUniform3f(lightSLoc, 0.5f, 0.5f, 0.5f);
+    glUniform3f(uViewPos, camera.position.x, camera.position.y, camera.position.z);
+
+ 
     glEnable(GL_DEPTH_TEST);
     while (!glfwWindowShouldClose(window))
     {
@@ -209,11 +229,13 @@ int main()
         camera.updateShader(projectionP);
         camera.proccessKeyInputs(window);
 
-       // door.draw();
-        seatsManager.draw(); // Iscrtavanje sedista
+        glUniform3f(glGetUniformLocation(unifiedShader, "uViewPos"),camera.position.x, camera.position.y, camera.position.z);
+
+        door.draw();
+        seatsManager.draw(camera, projectionP); // Iscrtavanje sedista
         wallsManager.draw();
         floorManager.draw();
-        //canvas.draw();
+        canvas.draw();
         //darkRect.draw();
         watermark.draw();
         //personManager.draw();
@@ -221,6 +243,8 @@ int main()
        /* checkForMovieStart();
         checkForMovieFinish();
         checkForSceneReset();*/
+
+
                
         glfwSwapBuffers(window);
         glfwPollEvents();

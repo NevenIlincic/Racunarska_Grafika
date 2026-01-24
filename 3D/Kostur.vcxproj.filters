@@ -110,6 +110,15 @@
     <ClInclude Include="TileVerticalElongated.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="model.hpp">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.hpp">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -119,6 +128,9 @@
     <None Include="texture.frag" />
     <None Include="basic.vert" />
     <None Include="basic.frag" />
+    <None Include="Resources\Door\Entrance_Door__vray.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\movie_camera.png">
@@ -131,6 +143,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\sitting_stickman.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\preview1.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\preview2.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\preview3.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Door\preview4.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

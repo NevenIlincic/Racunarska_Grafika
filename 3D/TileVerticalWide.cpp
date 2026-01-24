@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+﻿#include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -11,36 +11,51 @@
 
 TileVerticalWide::TileVerticalWide() {}
 
-TileVerticalWide::TileVerticalWide(unsigned int shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _width, float _height, std::vector<float> _tileColor) :
-    shaderProgram(shader), downLeftVertex(_downLeftVertex), normalVector(_normalVector), width(_width), height(_height), tileColor(_tileColor)
+TileVerticalWide::TileVerticalWide(unsigned int shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _width, float _height, std::vector<float> _tileColor, bool _isNormalTowardsPositive) :
+    shaderProgram(shader), downLeftVertex(_downLeftVertex), normalVector(_normalVector), width(_width), height(_height), tileColor(_tileColor), isNormalTowardsPositive(_isNormalTowardsPositive)
 {
     this->maxCameraDistance = 0.20f;
 
-    float vertices[] = {
-        downLeftVertex[0], downLeftVertex[1], downLeftVertex[2], this->normalVector[0], this->normalVector[1], this->normalVector[2], //Donje levo teme
-        downLeftVertex[0] + this->width, downLeftVertex[1], downLeftVertex[2], this->normalVector[0], this->normalVector[1], this->normalVector[2], //Donje desno 
-        downLeftVertex[0] + this->width, downLeftVertex[1] + this->height, downLeftVertex[2], this->normalVector[0], this->normalVector[1], this->normalVector[2], // Gornje desno
-        downLeftVertex[0], downLeftVertex[1] + this->height, downLeftVertex[2], this->normalVector[0], this->normalVector[1], this->normalVector[2], // Gornje levo
-    };
+    std::vector<float> vertices;
+    float x = this->downLeftVertex[0];
+    float y = this->downLeftVertex[1];
+    float z = this->downLeftVertex[2];
+
+    if (this->isNormalTowardsPositive) {
+        vertices = {
+            x, y, z, 0.0f, 0.0f, 1.0f, //Donje levo teme
+            x + this->width, y, z, 0.0f, 0.0f, 1.0f, //Donje desno 
+            x + this->width, y + this->height, z, 0.0f, 0.0f, 1.0f, // Gornje desno
+            x, y + this->height, z, 0.0f, 0.0f, 1.0f, // Gornje levo
+        };
+    }
+    else {
+        vertices = { //Gledano u pravcu normale
+            x, y, z, 0.0f, 0.0f, -1.0f,   ///Donje desno
+            x, y + this->height, z, 0.0f, 0.0f, -1.0f,///Gornje desno
+            x + this->width, y + this->height, z, 0.0f, 0.0f, -1.0f,/// Gornje levo
+            x + this->width, y, z, 0.0f, 0.0f, -1.0f/// Donje levo
+        };
+    }
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
     glBindVertexArray(VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
     // Pozicije
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // Normale (ako tvoj shader koristi location 3 za normale kao u SeatsManager-u)
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
 }
 
 void TileVerticalWide::draw() {
-    glUseProgram(this->shaderProgram);
+    /*glUseProgram(this->shaderProgram);
     glBindVertexArray(VAO);
 
     unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
@@ -53,6 +68,27 @@ void TileVerticalWide::draw() {
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
+    glBindVertexArray(0);*/
+    glUseProgram(this->shaderProgram);
+    glBindVertexArray(this->VAO);
+
+    unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
+    unsigned int diffLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kD");
+    unsigned int ambLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kA");
+    unsigned int specLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kS");
+    unsigned int shineLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.shine");
+
+    // Postavi boju pločice u materijal
+    glUniform3f(diffLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
+    glUniform3f(ambLoc, this->tileColor[0] * 0.2f, this->tileColor[1] * 0.2f, this->tileColor[2] * 0.2f);
+    glUniform3f(specLoc, 0.2f, 0.2f, 0.2f); // Pločice obično nisu previše sjajne
+    glUniform1f(shineLoc, 32.0f);
+
+    // Model matrica (ako ne rotiraš, ostaje identity)
+    glm::mat4 model = glm::mat4(1.0f);
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     glBindVertexArray(0);
         
 }

@@ -19,13 +19,13 @@ public:
     float length;
     float maxCameraDistance;
 
-
+    bool isNormalTowardsPositive;  //positive normal --->     negative normal <-----
     unsigned int VAO, VBO;
     unsigned int shaderProgram;
 
     TileVerticalElongated();
 
-    TileVerticalElongated(unsigned int shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _height, float _length, std::vector<float> _tileColor);
+    TileVerticalElongated(unsigned int shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _height, float _length, std::vector<float> _tileColor, bool _isNormalTowardsPositive);
 
     void draw();
 
