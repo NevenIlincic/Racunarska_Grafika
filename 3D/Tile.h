@@ -1,0 +1,13 @@
+#pragma once
+
+#include "Camera.h"
+#include <vector>
+
+class Tile {
+public:
+	std::vector<float> tileColor;
+
+	virtual ~Tile() {}
+	virtual void draw() = 0;
+	virtual void checkCameraCollision(Camera& camera) = 0;
+};

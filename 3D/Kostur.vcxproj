@@ -138,14 +138,24 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Util.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="TileVerticalElongated.cpp" />
     <ClCompile Include="VAOs.cpp" />
-    <ClCompile Include="TileVertical.cpp" />
-    <ClCompile Include="Walls.cpp" />
+    <ClCompile Include="TileVerticalWide.cpp" />
+    <ClCompile Include="WallsManager.cpp" />
     <ClCompile Include="Watermark.cpp" />
+    <ClCompile Include="WorldSpace.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="FloorManager.h" />
     <ClInclude Include="Header\stb_image.h" />
     <ClInclude Include="Header\Util.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileHorizontal.h" />
+    <ClInclude Include="TileVerticalElongated.h" />
+    <ClInclude Include="TileVerticalWide.h" />
+    <ClInclude Include="WallsManager.h" />
+    <ClInclude Include="WorldSpaceObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="basic.frag" />

@@ -8,8 +8,9 @@
 #include "../Door.cpp"
 #include "../Watermark.cpp"
 #include "../PersonManager.cpp"
-#include "../Walls.cpp"
-#include "../FloorManager.cpp"
+#include "../WallsManager.h"
+#include "../FloorManager.h"
+#include "../Camera.h"
 //#include "../Camera.cpp"
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
@@ -32,8 +33,6 @@ DarkRect darkRect;
 Door door;
 Watermark watermark;
 PersonManager personManager;
-Walls walls;
-FloorManager floorManager;
 
 unsigned watermarkTexture;
 
@@ -182,9 +181,11 @@ int main()
 
     camera = Camera(glm::vec3(-0.25f, 0.5f, 0.5f), unifiedShader);
     seatsManager = SeatsManager(5, 10, unifiedShader); // koristimo isti shader za sedišta
-    walls = Walls(unifiedShader);
-    floorManager = FloorManager(unifiedShader);
+    WallsManager wallsManager = WallsManager(unifiedShader);
+    FloorManager floorManager = FloorManager(unifiedShader);
 
+    camera.addWorldSpaceObject(&floorManager);
+    camera.addWorldSpaceObject(&wallsManager);
  /*   canvas = Canvas(rectShader);
     darkRect = DarkRect(rectShader);
     door = Door(rectShader);*/
@@ -209,11 +210,11 @@ int main()
         camera.proccessKeyInputs(window);
 
        // door.draw();
-        walls.draw();
         seatsManager.draw(); // Iscrtavanje sedista
+        wallsManager.draw();
+        floorManager.draw();
         //canvas.draw();
         //darkRect.draw();
-        floorManager.draw();
         watermark.draw();
         //personManager.draw();
 

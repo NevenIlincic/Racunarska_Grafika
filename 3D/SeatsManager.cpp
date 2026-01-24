@@ -8,7 +8,7 @@
 #include <algorithm> // za max()
 #include <iostream>
 #include "Seat.cpp"
-#include "Camera.cpp"
+#include "Camera.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>

@@ -60,16 +60,22 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Walls.cpp">
+    <ClCompile Include="WallsManager.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="TileHorizontal.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="TileVertical.cpp">
+    <ClCompile Include="TileVerticalWide.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="FloorManager.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldSpace.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="TileVerticalElongated.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +84,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldSpaceObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileHorizontal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileVerticalWide.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WallsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileVerticalElongated.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
