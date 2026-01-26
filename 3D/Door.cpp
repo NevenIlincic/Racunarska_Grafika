@@ -42,9 +42,9 @@ void Door::draw() {
     modelMat = glm::scale(modelMat, glm::vec3(0.001f, 0.001f, 0.001f));
 
     this->shaderProgram.setMat4("uM", modelMat);
-    glDisable(GL_CULL_FACE);
+    /*glDisable(GL_CULL_FACE);*/
     this->doorModel.Draw(this->shaderProgram);
-    glEnable(GL_CULL_FACE);
+    /*glEnable(GL_CULL_FACE);*/
 
     this->shaderProgram.setBool("useTex", false);
 

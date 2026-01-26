@@ -37,15 +37,11 @@ void PersonManager::draw(FloorManager& floorManager) {
             }
 
             float scale = 0.05f;
-
             modelMat = glm::rotate(modelMat, glm::radians(person.currentAngle), glm::vec3(0.0f, 1.0f, 0.0f));
             modelMat = glm::scale(modelMat, glm::vec3(scale, scale, scale));
-
             this->shaderProgram.setMat4("uM", modelMat);
 
-            glDisable(GL_CULL_FACE);
             person.personModel.Draw(this->shaderProgram);
-            glEnable(GL_CULL_FACE);
              
             if (person.isSitting) {
    

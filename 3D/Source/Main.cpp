@@ -45,7 +45,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
-    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+    if (key == GLFW_KEY_Z && action == GLFW_PRESS)
     {
         if (glIsEnabled(GL_DEPTH_TEST)){ glDisable(GL_DEPTH_TEST); }
         else {
@@ -53,7 +53,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         }
     }
  
-    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+    if (key == GLFW_KEY_C && action == GLFW_PRESS)
     {
         if (glIsEnabled(GL_CULL_FACE)) { glDisable(GL_CULL_FACE); }
         else {
@@ -235,7 +235,6 @@ int main()
         floorManager.draw();
         canvas.draw();
         //darkRect.draw();
-       /* lija.Draw(unifiedShader);*/
         personManager.draw(floorManager);
         watermark.draw();
 
