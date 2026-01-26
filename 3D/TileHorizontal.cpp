@@ -52,43 +52,9 @@ TileHorizontal::TileHorizontal(Shader _shader, std::vector<float> _downLeftVerte
 }
 
 void TileHorizontal::draw() {
-   /* glUseProgram(this->shaderProgram);
-    glBindVertexArray(this->VAO);
-
-    unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
-    unsigned int diffLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kD");
-    unsigned int ambLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kA");
-    unsigned int specLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kS");
-
-    glUniform3f(diffLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    glUniform3f(ambLoc, this->tileColor[0] * 0.2f, this->tileColor[1] * 0.2f, this->tileColor[2] * 0.2f); // Ambijent je tamnija verzija boje
-    glUniform3f(specLoc, 1.0f, 1.0f, 1.0f);
-
-    glm::mat4 model = glm::mat4(1.0f);
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-   // glUniform3f(colorLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-
-    glBindVertexArray(0);*/
-    /*glUseProgram(this->shaderProgram);*/
     this->shaderProgram.use();
     glBindVertexArray(this->VAO);
 
-    /*unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
-    unsigned int diffLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kD");
-    unsigned int ambLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kA");
-    unsigned int specLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kS");
-    unsigned int shineLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.shine);"*/
-
-
-    // Postavi boju pločice u materijal
-    //glUniform3f(diffLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    //glUniform3f(ambLoc, this->tileColor[0] * 0.2f, this->tileColor[1] * 0.2f, this->tileColor[2] * 0.2f);
-    //glUniform3f(diffLoc, 0.8f, 0.8f, 0.8f); // Svetlo siva (difuzna)
-    //glUniform3f(ambLoc, 0.3f, 0.3f, 0.3f);
-    //glUniform3f(specLoc, 0.2f, 0.2f, 0.2f); // Pločice obično nisu previše sjajne
-    //glUniform1f(shineLoc, 32.0f);
     this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0], this->tileColor[1], this->tileColor[2]);
     this->shaderProgram.setVec3("uMaterial.kA", 0.3f, 0.3f, 0.3f);
     this->shaderProgram.setVec3("uMaterial.kS", 0.2f, 0.2f, 0.2f);
@@ -96,7 +62,6 @@ void TileHorizontal::draw() {
 
     // Model matrica (ako ne rotiraš, ostaje identity)
     glm::mat4 model = glm::mat4(1.0f);
-    /*glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));*/
     this->shaderProgram.setMat4("uM", model);
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
@@ -125,3 +90,5 @@ void TileHorizontal::checkCameraCollision(Camera& camera) {
         }
     }
 }
+
+void TileHorizontal::checkPersonCollision(Person& person){}

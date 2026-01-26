@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "Tile.h"
+#include "Person.h"
 
 class TileVerticalWide : public Tile {
 
@@ -30,4 +31,6 @@ public:
     void draw();
 
     void checkCameraCollision(Camera& camera);
+
+    void checkPersonCollision(Person& person, float stepHeight);
 };

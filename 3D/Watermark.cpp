@@ -1,90 +1,71 @@
-﻿#include <vector>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
-
-#define _USE_MATH_DEFINES
-#include <cmath> // za pi
-#include <algorithm> // za max()
-#include "Header/Util.h"
-
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+﻿#include "Watermark.h"
 
 
+Watermark::Watermark() {}
 
-class Watermark {
-public:
-    unsigned int VAO, VBO;     // zajednički VAO/VBO
-    unsigned int shaderTextureProgram;
-    unsigned watermarkTexture;
+Watermark::Watermark(Shader _shader): shaderProgram(_shader) {
 
-	Watermark() {};
+    preprocessTexture(watermarkTexture, "Resources/watermark.png", false);
 
-	Watermark(unsigned int shader): shaderTextureProgram(shader) {
+    float quadVertices[] = {
+        //  X,     Y,     U,    V
+        -1.0f, -0.75f,    0.0f, 0.0f, // 1. Donje levo 
+        -0.5f, -0.75f,    1.0f, 0.0f, // 2. Donje desno
+        -0.5f, -0.85f,    1.0f, 1.0f, // 3. Gornje desno
+        -1.0f, -0.85f,    0.0f, 1.0f
+    };
 
-        preprocessTexture(watermarkTexture, "Resources/watermark.png", false);
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
 
-        float quadVertices[] = {
-            //  X,     Y,     U,    V
-            -1.0f, -0.75f,    0.0f, 0.0f, // 1. Donje levo 
-            -0.5f, -0.75f,    1.0f, 0.0f, // 2. Donje desno
-            -0.5f, -0.85f,    1.0f, 1.0f, // 3. Gornje desno
-            -1.0f, -0.85f,    0.0f, 1.0f
-        };
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
 
-        glGenVertexArrays(1, &VAO);
-        glGenBuffers(1, &VBO);
+    // pozicija
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 
-        glBindVertexArray(VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
+    // tekstura
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
-        // pozicija
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
+    glBindVertexArray(0);
 
-        // tekstura
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
-        glEnableVertexAttribArray(2);
+}
 
-        glBindVertexArray(0);
+void Watermark::draw() {
+    this->shaderProgram.use();
+    GLboolean wasDepthTestEnabled = glIsEnabled(GL_DEPTH_TEST);
+    GLboolean wasCullFaceEnabled = glIsEnabled(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
 
-	}
-
-    void draw() {
-        glUseProgram(shaderTextureProgram);
-        GLboolean wasDepthTestEnabled = glIsEnabled(GL_DEPTH_TEST);
-        GLboolean wasCullFaceEnabled = glIsEnabled(GL_CULL_FACE);
-        glDisable(GL_DEPTH_TEST);
-
-        // 2. Isključi Cull Face tako da se vidi čak i ako je naopako
-        glDisable(GL_CULL_FACE);
+    // 2. Isključi Cull Face tako da se vidi čak i ako je naopako
+    glDisable(GL_CULL_FACE);
        
-        // Koristi Identity matrice da ignorišeš kameru
-        glm::mat4 identity = glm::mat4(1.0f);
-        glUniformMatrix4fv(glGetUniformLocation(shaderTextureProgram, "uM"), 1, GL_FALSE, glm::value_ptr(identity));
-        glUniformMatrix4fv(glGetUniformLocation(shaderTextureProgram, "uV"), 1, GL_FALSE, glm::value_ptr(identity));
-        glUniformMatrix4fv(glGetUniformLocation(shaderTextureProgram, "uP"), 1, GL_FALSE, glm::value_ptr(identity));
+    // Koristi Identity matrice da ignorišeš kameru
+    glm::mat4 identity = glm::mat4(1.0f);
+    this->shaderProgram.setMat4("uM", identity);
+    this->shaderProgram.setMat4("uV", identity);
+    this->shaderProgram.setMat4("uP", identity);
+   /* this->shaderProgram.setInt("uTex", watermarkTexture);*/
+    this->shaderProgram.setFloat("uAlpha", 0.75f);
 
-        glUniform1i(glGetUniformLocation(shaderTextureProgram, "useTex"), 1);
-        glUniform1f(glGetUniformLocation(shaderTextureProgram, "uAlpha"), 1.0f);
+   
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, watermarkTexture);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, watermarkTexture);
+    this->shaderProgram.setInt("uTex", 0);
 
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-        glBindVertexArray(0);
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    glBindVertexArray(0);
 
-        if (wasDepthTestEnabled) glEnable(GL_DEPTH_TEST);
-        else glDisable(GL_DEPTH_TEST);
+    if (wasDepthTestEnabled) glEnable(GL_DEPTH_TEST);
+    else glDisable(GL_DEPTH_TEST);
 
-        if (wasCullFaceEnabled) glEnable(GL_CULL_FACE);
-        else glDisable(GL_CULL_FACE);
+    if (wasCullFaceEnabled) glEnable(GL_CULL_FACE);
+    else glDisable(GL_CULL_FACE);
 
   
-    }
-
-};
+}

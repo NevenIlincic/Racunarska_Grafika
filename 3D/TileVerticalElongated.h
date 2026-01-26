@@ -30,4 +30,5 @@ public:
     void draw();
 
     void checkCameraCollision(Camera& camera);
+    void checkPersonCollision(Person& person);
 };

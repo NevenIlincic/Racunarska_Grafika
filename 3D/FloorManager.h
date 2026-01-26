@@ -9,7 +9,7 @@ class FloorManager : public WorldSpaceObject {
 
 public:
     std::vector<Tile*> floorTiles;
-  /*  std::vector<Tile> floorTilesVertical;*/
+    std::vector<Tile*> floorTilesVertical;
     float stepHeight;
 
     Shader shaderProgram;
@@ -23,4 +23,5 @@ public:
     void draw();
 
     void checkCameraCollision(Camera& camera);
+    void checkPersonCollision(Person& person);
 };

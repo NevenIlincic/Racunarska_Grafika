@@ -141,6 +141,10 @@ public:
         return glGetUniformLocation(ID, name.c_str());
     }
 
+    glm::mat4 getMat4(const std::string name) {
+        return glGetUniformLocation(ID, name.c_str());
+    }
+
 private:
     // utility function for checking shader compilation/linking errors.
     // ------------------------------------------------------------------------

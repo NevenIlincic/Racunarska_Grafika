@@ -8,7 +8,7 @@
 #include <cmath> // za pi
 #include <algorithm> // za max()
 #include <iostream>
-#include "Seat.cpp"
+#include "Seat.h"
 #include "Camera.h"
 #include "shader.hpp"
 

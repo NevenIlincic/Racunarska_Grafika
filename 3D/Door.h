@@ -30,6 +30,7 @@ public:
 	float doorWidth, doorHeight;
 
 	Model doorModel;
+	float currentAngle;
 
 
 	Door();

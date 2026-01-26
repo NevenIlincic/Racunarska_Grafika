@@ -55,35 +55,9 @@ TileVerticalWide::TileVerticalWide(Shader _shader, std::vector<float> _downLeftV
 }
 
 void TileVerticalWide::draw() {
-    /*glUseProgram(this->shaderProgram);
-    glBindVertexArray(VAO);
-
-    unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
-    unsigned int colorLoc = glGetUniformLocation(this->shaderProgram, "uColor");
-
-    glm::mat4 model = glm::mat4(1.0f);
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-    glUniform3f(colorLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-
-    glBindVertexArray(0);*/
-    //glUseProgram(this->shaderProgram);
     this->shaderProgram.use();
     glBindVertexArray(this->VAO);
 
-    /*unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
-    unsigned int diffLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kD");
-    unsigned int ambLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kA");
-    unsigned int specLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kS");
-    unsigned int shineLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.shine");*/
-
-    // Postavi boju pločice u materijal
-    //glUniform3f(diffLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    //glUniform3f(ambLoc, this->tileColor[0] * 0.2f, this->tileColor[1] * 0.2f, this->tileColor[2] * 0.2f);
-    //glUniform3f(specLoc, 0.2f, 0.2f, 0.2f); // Pločice obično nisu previše sjajne
-    //glUniform1f(shineLoc, 32.0f);
     this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0], this->tileColor[1], this->tileColor[2]);
     this->shaderProgram.setVec3("uMaterial.kA", 0.3f, 0.3f, 0.3f);
     this->shaderProgram.setVec3("uMaterial.kS", 0.2f, 0.2f, 0.2f);
@@ -118,6 +92,29 @@ void TileVerticalWide::checkCameraCollision(Camera& camera) {
         else {
             if (camera.position.z > this->downLeftVertex[2] - this->maxCameraDistance) {
                 camera.position.z = this->downLeftVertex[2] - this->maxCameraDistance;
+            }
+        }
+    }
+}
+
+void TileVerticalWide::checkPersonCollision(Person& person, float stepHeight) {
+    float minX = this->downLeftVertex[0];
+    float maxX = this->downLeftVertex[0] + this->width;
+
+    float minY = this->downLeftVertex[1];
+    float maxY = this->downLeftVertex[1] + this->height;
+
+    if (person.x >= minX && person.x <= maxX &&
+        person.y >= minY && person.y <= maxY) {
+
+        if (this->normalVector[2] > 0) {
+            if (person.z < this->downLeftVertex[2] + 0.35f) {
+                person.y = person.y + stepHeight;
+            }
+        }
+        else {
+            if (person.z > this->downLeftVertex[2] - this->maxCameraDistance) {
+                person.z = this->downLeftVertex[2] - this->maxCameraDistance;
             }
         }
     }

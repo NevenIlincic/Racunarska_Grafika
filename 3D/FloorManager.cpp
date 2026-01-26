@@ -53,6 +53,7 @@ FloorManager::FloorManager(Shader _shader) : shaderProgram(_shader) {
         bool isNormalTowardsPositive = true;
         TileVerticalWide* verticalTile = new TileVerticalWide(this->shaderProgram, currentPosVertical, verticalTileNormal, floorTileWidth, this->stepHeight, verticalTileColor, isNormalTowardsPositive);
         this->floorTiles.push_back(verticalTile);
+        this->floorTilesVertical.push_back(verticalTile);
         currentZ -= tileLength;
     }
       
@@ -62,17 +63,16 @@ void FloorManager::draw() {
     for (Tile* tile : this->floorTiles) {
         tile->draw();
     }
-    /*for (TileHorizontal floorTileHorizontal : this->floorTilesHorizontal)
-    {
-        floorTileHorizontal.draw();
-    }
-    for (TileVerticalWide floorTileVertical : this->floorTilesVertical) {
-        floorTileVertical.draw();
-    }*/
 }
 
 void FloorManager::checkCameraCollision(Camera& camera) {
     for (Tile* tile : this->floorTiles) {
         tile->checkCameraCollision(camera);
+    }
+}
+
+void FloorManager::checkPersonCollision(Person& person) {
+    for (Tile* verticalTileWide : this->floorTilesVertical) {
+        verticalTileWide->checkPersonCollision(person, this->stepHeight);
     }
 }

@@ -155,6 +155,9 @@
     <ClInclude Include="Header\Util.h" />
     <ClInclude Include="mesh.hpp" />
     <ClInclude Include="model.hpp" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="PersonManager.h" />
+    <ClInclude Include="Seat.h" />
     <ClInclude Include="SeatsManager.h" />
     <ClInclude Include="shader.hpp" />
     <ClInclude Include="Tile.h" />
@@ -162,6 +165,7 @@
     <ClInclude Include="TileVerticalElongated.h" />
     <ClInclude Include="TileVerticalWide.h" />
     <ClInclude Include="WallsManager.h" />
+    <ClInclude Include="Watermark.h" />
     <ClInclude Include="WorldSpaceObject.h" />
   </ItemGroup>
   <ItemGroup>

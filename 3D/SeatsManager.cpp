@@ -80,23 +80,13 @@ SeatsManager::SeatsManager(int _rows, int _cols, Shader shader) : rows(_rows), c
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    /*glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(7 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
-    glEnableVertexAttribArray(1);*/
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);
     glEnableVertexAttribArray(0);
 
-    // 1: NORMALE (X, Y, Z) - offset je 9 float-ova (3 pos + 4 col + 2 tex)
-    // Shader traži normale na lokaciji 1!
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void*)(9 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    // 2: UV Koordinate (S, T) - offset je 7 float-ova (3 pos + 4 col)
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(7 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
@@ -106,27 +96,13 @@ SeatsManager::SeatsManager(int _rows, int _cols, Shader shader) : rows(_rows), c
 
 // Crtanje svih sedišta
 void SeatsManager::draw() {
-    /*glUseProgram(shaderProgram); *///
     this->shaderProgram.use();
     glBindVertexArray(VAO);
 
-    // Uzimamo samo lokacije koje nam trebaju za materijal sedišta i model matricu
-    /*unsigned int modelLoc = glGetUniformLocation(shaderProgram, "uM");
-    unsigned int diffLoc = glGetUniformLocation(shaderProgram, "uMaterial.kD");
-    unsigned int ambLoc = glGetUniformLocation(shaderProgram, "uMaterial.kA");
-    unsigned int specLoc = glGetUniformLocation(shaderProgram, "uMaterial.kS");
-    unsigned int shineLoc = glGetUniformLocation(shaderProgram, "uMaterial.shine");*/
-   
-    // Postavljamo zajednički sjaj za sva sedišta jednom
-    /*glUniform3f(specLoc, 0.1f, 0.1f, 0.1f);*/
     this->shaderProgram.setVec3("uMaterial.kS", 0.1f, 0.1f, 0.1f);
-    /* glUniform1f(shineLoc, 32.0f);*/
     this->shaderProgram.setFloat("uMaterial.shine", 32.0f);
 
     for (Seat& seat : seats) {
-        // Boja konkretnog sedišta
-        /*glUniform3f(diffLoc, seat.r, seat.g, seat.b);
-        glUniform3f(ambLoc, seat.r, seat.g, seat.b);*/
         this->shaderProgram.setVec3("uMaterial.kD", seat.r, seat.g, seat.b);
         this->shaderProgram.setVec3("uMaterial.kA", seat.r, seat.g, seat.b);
 
@@ -134,7 +110,6 @@ void SeatsManager::draw() {
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(seat.x, seat.y, seat.z));
         model = glm::scale(model, glm::vec3(seatSize, seatSize, seatSize));
-        /*glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));*/
         this->shaderProgram.setMat4("uM", model);
 
         for (int i = 0; i < 6; i++) {
@@ -145,10 +120,12 @@ void SeatsManager::draw() {
 }
 
 void SeatsManager::reserve(Camera& camera) {
-    for (Seat& seat : this->seats) {
-        if (this->isCameraLookingAt(camera, seat, 0.35f)) {
-            seat.reserveSeat(); // Rezerviši samo ono što gledaš i što je blizu
-            break;
+    if (this->canManipulateSeats) {
+        for (Seat& seat : this->seats) {
+            if (this->isCameraLookingAt(camera, seat, 0.35f)) {
+                seat.reserveSeat(); // Rezerviši samo ono što gledaš i što je blizu
+                break;
+            }
         }
     }
 }

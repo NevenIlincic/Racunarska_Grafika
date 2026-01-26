@@ -51,36 +51,9 @@ TileVerticalElongated::TileVerticalElongated(Shader _shader, std::vector<float> 
 }
 
 void TileVerticalElongated::draw() {
-    /*glUseProgram(this->shaderProgram);
-    glBindVertexArray(VAO);
-
-    unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
-    unsigned int colorLoc = glGetUniformLocation(this->shaderProgram, "uColor");
-
-    glm::mat4 model = glm::mat4(1.0f);
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-    glUniform3f(colorLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-
-    glBindVertexArray(0);*/
-
-    //glUseProgram(this->shaderProgram);
     this->shaderProgram.use();
     glBindVertexArray(this->VAO);
 
-   /* unsigned int modelLoc = glGetUniformLocation(this->shaderProgram, "uM");
-    unsigned int diffLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kD");
-    unsigned int ambLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kA");
-    unsigned int specLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.kS");
-    unsigned int shineLoc = glGetUniformLocation(this->shaderProgram, "uMaterial.shine");*/
-
-    // Postavi boju pločice u materijal
-    //glUniform3f(diffLoc, this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    //glUniform3f(ambLoc, this->tileColor[0] * 0.2f, this->tileColor[1] * 0.2f, this->tileColor[2] * 0.2f);
-    //glUniform3f(specLoc, 0.2f, 0.2f, 0.2f); // Pločice obično nisu previše sjajne
-    //glUniform1f(shineLoc, 32.0f);
     this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0], this->tileColor[1], this->tileColor[2]);
     this->shaderProgram.setVec3("uMaterial.kA", 0.2f, 0.2f, 0.2f);
     this->shaderProgram.setVec3("uMaterial.kS", 0.2f, 0.2f, 0.2f);
@@ -118,3 +91,5 @@ void TileVerticalElongated::checkCameraCollision(Camera& camera) {
         }
     }
 }
+
+void TileVerticalElongated::checkPersonCollision(Person& person){}

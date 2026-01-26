@@ -6,13 +6,13 @@
 #include "../Canvas.h"
 //#include "../DarkRect.cpp"
 #include "../Door.h"
-#include "../Watermark.cpp"
-//#include "../PersonManager.cpp"
+#include "../Watermark.h"
+#include "../PersonManager.h"
 #include "../WallsManager.h"
 #include "../FloorManager.h"
 #include "../Camera.h"
 #include "../shader.hpp"
-//#include "../Camera.cpp"
+
 // Main fajl funkcija sa osnovnim komponentama OpenGL programa
 
 // Projekat je dozvoljeno pisati počevši od ovog kostura
@@ -33,7 +33,7 @@ Canvas canvas;
 //DarkRect darkRect;
 Door door;
 Watermark watermark;
-//PersonManager personManager;
+PersonManager personManager;
 
 unsigned watermarkTexture;
 
@@ -66,9 +66,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         seatsManager.buySeats(numSeats);
     }
 
-  /*  if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_ENTER && action == GLFW_PRESS) {
         if (!canvas.hasMovieStarted && canLetPeopleIn && !seatsManager.fillUsedSeats().empty()) {
-            darkRect.changeTransparency();
+            //darkRect.changeTransparency();
             seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
             door.openDoor();
             std::vector<Seat> usedSeats = seatsManager.fillUsedSeats();
@@ -76,7 +76,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             personManager.isTimeToSpawnPeople = true;
             canLetPeopleIn = false;
         }
-    }*/
+    }
 }
 
 
@@ -104,12 +104,12 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         seatsManager.reserve(camera); // pozovi metodu SeatsManager-a
     }
 }
-/*
+
 void checkForSceneReset() {
     if (personManager.allPeopleLeft){
         personManager.allPeopleLeft = false;
         hasMovieStarted = false;
-        darkRect.changeTransparency();
+        //darkRect.changeTransparency();
         seatsManager.canManipulateSeats = !seatsManager.canManipulateSeats;
         door.closeDoor();
         personManager.isTimeToSpawnPeople = false;
@@ -141,7 +141,7 @@ void checkForMovieStart() {
         door.closeDoor();
         canStartMovie = false;
     }
-}*/
+}
 int main()
 {
     glfwInit();
@@ -172,7 +172,7 @@ int main()
     /*glUniform1i(glGetUniformLocation(unifiedShader, "uTex"), 0);*/
     unifiedShader.setInt("uTex", 0);
 
-    unsigned int textureShader = createShader("basic.vert", "texture.frag");
+    Shader textureShader("basic.vert", "texture.frag");
 
     /*unsigned int modelLoc = glGetUniformLocation(unifiedShader, "uM");
     unsigned int viewLoc = glGetUniformLocation(unifiedShader, "uV");
@@ -199,7 +199,7 @@ int main()
     /*darkRect = DarkRect(rectShader);*/
     door = Door(unifiedShader, 0.25f, 0.5f);
     watermark = Watermark(textureShader);
-   // personManager = PersonManager(textureShader);
+    personManager = PersonManager(unifiedShader);
 
 
     glfwSetKeyCallback(window, key_callback);
@@ -235,9 +235,9 @@ int main()
         floorManager.draw();
         canvas.draw();
         //darkRect.draw();
-        watermark.draw();
        /* lija.Draw(unifiedShader);*/
-        //personManager.draw();
+        personManager.draw(floorManager);
+        watermark.draw();
 
        /* checkForMovieStart();
         checkForMovieFinish();
