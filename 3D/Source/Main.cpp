@@ -238,9 +238,9 @@ int main()
         personManager.draw(floorManager);
         watermark.draw();
 
-       /* checkForMovieStart();
+        checkForMovieStart();
         checkForMovieFinish();
-        checkForSceneReset();*/
+        checkForSceneReset();
 
 
                

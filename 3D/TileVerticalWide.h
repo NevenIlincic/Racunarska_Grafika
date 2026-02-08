@@ -20,6 +20,7 @@ public:
     float maxCameraDistance;
 
     bool isNormalTowardsPositive;
+    bool drawTexture;
 
     unsigned int VAO, VBO;
     Shader shaderProgram;

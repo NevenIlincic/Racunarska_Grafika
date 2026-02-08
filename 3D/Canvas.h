@@ -30,6 +30,9 @@ public:
     bool hasMovieStarted;
     bool isMovieFinished;
 
+    std::vector<unsigned> images;
+    int imageIndex;
+
     Canvas();
 
     Canvas(Shader _shader, float _width, float _height);

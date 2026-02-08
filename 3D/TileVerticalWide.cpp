@@ -21,20 +21,22 @@ TileVerticalWide::TileVerticalWide(Shader _shader, std::vector<float> _downLeftV
     float y = this->downLeftVertex[1];
     float z = this->downLeftVertex[2];
 
+    this->drawTexture = false;
+
     if (this->isNormalTowardsPositive) {
         vertices = {
-            x, y, z, 0.0f, 0.0f, 1.0f, //Donje levo teme
-            x + this->width, y, z, 0.0f, 0.0f, 1.0f, //Donje desno 
-            x + this->width, y + this->height, z, 0.0f, 0.0f, 1.0f, // Gornje desno
-            x, y + this->height, z, 0.0f, 0.0f, 1.0f, // Gornje levo
+            x, y, z, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, //Donje levo teme
+            x + this->width, y, z, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, //Donje desno 
+            x + this->width, y + this->height, z, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // Gornje desno
+            x, y + this->height, z, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f // Gornje levo
         };
     }
     else {
         vertices = { //Gledano u pravcu normale
-            x, y, z, 0.0f, 0.0f, -1.0f,   ///Donje desno
-            x, y + this->height, z, 0.0f, 0.0f, -1.0f,///Gornje desno
-            x + this->width, y + this->height, z, 0.0f, 0.0f, -1.0f,/// Gornje levo
-            x + this->width, y, z, 0.0f, 0.0f, -1.0f/// Donje levo
+            x, y, z, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f,   ///Donje desno
+            x, y + this->height, z, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,///Gornje desno
+            x + this->width, y + this->height, z, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,/// Gornje levo
+            x + this->width, y, z, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f/// Donje levo
         };
     }
 
@@ -46,11 +48,15 @@ TileVerticalWide::TileVerticalWide(Shader _shader, std::vector<float> _downLeftV
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
     // Pozicije
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // Normale (ako tvoj shader koristi location 3 za normale kao u SeatsManager-u)
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    //Tekstura
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
 }
 
