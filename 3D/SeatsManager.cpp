@@ -102,9 +102,11 @@ void SeatsManager::draw() {
     this->shaderProgram.setVec3("uMaterial.kS", 0.1f, 0.1f, 0.1f);
     this->shaderProgram.setFloat("uMaterial.shine", 32.0f);
 
+    this->shaderProgram.setBool("useTex", false);
+
     for (Seat& seat : seats) {
         this->shaderProgram.setVec3("uMaterial.kD", seat.r, seat.g, seat.b);
-        this->shaderProgram.setVec3("uMaterial.kA", seat.r, seat.g, seat.b);
+        this->shaderProgram.setVec3("uMaterial.kA", seat.r * 0.1f, seat.g * 0.1f, seat.b * 0.1f);
 
         // Pozicija konkretnog sedišta
         glm::mat4 model = glm::mat4(1.0f);
@@ -112,11 +114,15 @@ void SeatsManager::draw() {
         model = glm::scale(model, glm::vec3(seatSize, seatSize, seatSize));
         this->shaderProgram.setMat4("uM", model);
 
+        //seat.seatModel.Draw(this->shaderProgram);
+
         for (int i = 0; i < 6; i++) {
             glDrawArrays(GL_TRIANGLE_FAN, i * 4, 4);
         }
     }
     glBindVertexArray(0);
+    this->shaderProgram.setBool("useTex", false);
+    
 }
 
 void SeatsManager::reserve(Camera& camera) {

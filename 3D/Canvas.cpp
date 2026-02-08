@@ -29,7 +29,8 @@ Canvas::Canvas(Shader _shader, float _width, float _height): shaderProgram(_shad
     std::vector<float> frontWallDownLeftVertex = { -1.0f, 0.5f, 0.99f };
     std::vector<float> frontWallNormalVector = { 0.0f, 0.0f, -1.0f };
     bool isNormalTowardsPositive = false;
-    this->canvas =  new TileVerticalWide(this->shaderProgram, frontWallDownLeftVertex, frontWallNormalVector, this->canvasWidth, this->canvasHeight, wallTileWideColor, isNormalTowardsPositive);
+
+    this->canvas =  new TileVerticalWide(this->shaderProgram, frontWallDownLeftVertex, frontWallNormalVector, this->canvasWidth, this->canvasHeight, wallTileWideColor, isNormalTowardsPositive, true);
      
     for (int i = 0; i <= 19; i++) {
         std::string imagePath = "Resources/Movie/frame_" + std::to_string(i + 1) + ".jpg";
@@ -52,6 +53,7 @@ void Canvas::draw() {
     }
     this->canvas->draw();
     checkForMovieFinish();
+
 }
 
 void Canvas::startMovie() {

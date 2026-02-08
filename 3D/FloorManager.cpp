@@ -51,7 +51,7 @@ FloorManager::FloorManager(Shader _shader) : shaderProgram(_shader) {
         std::vector<float> verticalTileNormal = { 0.0f, 0.0f, 1.0f };
         std::vector<float> verticalTileColor = { 0.3f, 0.3f, 0.3f };
         bool isNormalTowardsPositive = true;
-        TileVerticalWide* verticalTile = new TileVerticalWide(this->shaderProgram, currentPosVertical, verticalTileNormal, floorTileWidth, this->stepHeight, verticalTileColor, isNormalTowardsPositive);
+        TileVerticalWide* verticalTile = new TileVerticalWide(this->shaderProgram, currentPosVertical, verticalTileNormal, floorTileWidth, this->stepHeight, verticalTileColor, isNormalTowardsPositive, false);
         this->floorTiles.push_back(verticalTile);
         this->floorTilesVertical.push_back(verticalTile);
         currentZ -= tileLength;

@@ -26,6 +26,7 @@ float uX = 0.0f;
 float uY = 0.0f;
 
 bool hasMovieStarted = false;
+bool isMoviePlaying = false;
 
 Camera camera;
 SeatsManager seatsManager;
@@ -118,14 +119,16 @@ void checkForSceneReset() {
         canvas.resetCanvas();
         canStartMovie = true;
         canLetPeopleIn = true;
+        isMoviePlaying = false;
 
     }
 }
 
-void checkForMovieFinish() {
+void checkForMovieFinish(Shader shader) {
     if (canvas.isMovieFinished) {
         personManager.isMovieFinished = true;
         door.openDoor();
+        isMoviePlaying = false;
     }
 
     if (personManager.allPeopleLeft) {
@@ -135,11 +138,12 @@ void checkForMovieFinish() {
 
 }
 
-void checkForMovieStart() {
+void checkForMovieStart(Shader shader) {
     if (personManager.allPeopleSat && canStartMovie) {
         canvas.startMovie();
         door.closeDoor();
         canStartMovie = false;
+        isMoviePlaying = true;
     }
 }
 int main()
@@ -207,13 +211,6 @@ int main()
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-  
-    unifiedShader.setVec3("uLight.kA", 0.4f, 0.4f, 0.4f);
-    unifiedShader.setVec3("uLight.kD", 0.75f, 0.75f, 0.75f);
-    unifiedShader.setVec3("uLight.kS", 0.5f, 0.5f, 0.5f);
-    unifiedShader.setVec3("uLight.pos", camera.position.x, camera.position.y, camera.position.z);
-
- 
     glEnable(GL_DEPTH_TEST);
     while (!glfwWindowShouldClose(window))
     {
@@ -222,6 +219,19 @@ int main()
         unifiedShader.use();
       
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        if (isMoviePlaying) {
+            unifiedShader.setVec3("uLight.kA", 0.1f, 0.1f, 0.1f);
+            unifiedShader.setVec3("uLight.kD", 1.0f, 1.0f, 0.9f);
+            unifiedShader.setVec3("uLight.kS", 1.0f, 1.0f, 1.0f);
+            unifiedShader.setVec3("uLight.pos", 0.0f, 1.0f, 0.5f);
+        }
+        else {
+            unifiedShader.setVec3("uLight.kA", 0.7f, 0.7f, 0.7f);
+            unifiedShader.setVec3("uLight.kD", 0.5f, 0.5f, 0.5f);
+            unifiedShader.setVec3("uLight.kS", 0.5f, 0.5f, 0.5f);
+            unifiedShader.setVec3("uLight.pos", -0.2f, 1.85f, -0.5f);
+        }
 
         camera.updateShader(projectionP);
         camera.proccessKeyInputs(window);
@@ -238,10 +248,11 @@ int main()
         personManager.draw(floorManager);
         watermark.draw();
 
-        checkForMovieStart();
-        checkForMovieFinish();
+        checkForMovieStart(unifiedShader);
+        checkForMovieFinish(unifiedShader);
         checkForSceneReset();
-
+        
+       
 
                
         glfwSwapBuffers(window);

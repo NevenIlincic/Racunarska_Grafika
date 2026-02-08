@@ -22,10 +22,11 @@ public:
 	bool hasExited;
 
 	Model personModel;
+	int modelIndex;
 	float currentAngle;
 
 	Person();
-	Person(float _x, float _y, float _z, float _destinationX, float _destinationY, float _destinationZ);
+	Person(int index, float _x, float _y, float _z, float _destinationX, float _destinationY, float _destinationZ);
 	
 	void move();
 

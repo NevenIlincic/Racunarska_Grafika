@@ -178,6 +178,7 @@
     <None Include="Resources\Door\door modern.mtl" />
     <None Include="Resources\Door\Door.mtl" />
     <None Include="Resources\Door\Entrance_Door__vray.mtl" />
+    <None Include="Resources\Seat\theater_chair.glb.mtl" />
     <None Include="Resources\test\characterlowpoly2.mtl" />
     <None Include="texture.frag" />
     <None Include="texture.vert" />
@@ -191,6 +192,7 @@
     <Image Include="Resources\Door\wood door0001.png" />
     <Image Include="Resources\Door\wood door0002.png" />
     <Image Include="Resources\movie_camera.png" />
+    <Image Include="Resources\Seat\CustomMaterial_diffuse.jpg" />
     <Image Include="Resources\sitting_stickman.png" />
     <Image Include="Resources\stickman.png" />
     <Image Include="Resources\watermark.png" />

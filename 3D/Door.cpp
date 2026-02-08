@@ -24,7 +24,7 @@ Door::Door(Shader _shader, float _doorWidth, float _doorHeight): shaderProgram(_
     std::vector<float> frontWallNormalVector = { 0.0f, 0.0f, -1.0f };
 
     bool isNormalTowardsPositive = false;
-    this->door = new TileVerticalWide(this->shaderProgram, frontWallDownLeftVertex, frontWallNormalVector, this->doorWidth, this->doorHeight, wallTileWideColor, false);
+    this->door = new TileVerticalWide(this->shaderProgram, frontWallDownLeftVertex, frontWallNormalVector, this->doorWidth, this->doorHeight, wallTileWideColor, false, false);
         
     this->doorModel = Model("Resources/Door/door.obj");
     this->currentAngle = 90.0f;

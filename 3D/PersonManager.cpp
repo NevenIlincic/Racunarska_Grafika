@@ -2,7 +2,7 @@
 
 PersonManager::PersonManager() {};
 
-PersonManager::PersonManager(Shader shader): shaderProgram(shader), isTimeToSpawnPeople(false) {
+PersonManager::PersonManager(Shader shader) : shaderProgram(shader), isTimeToSpawnPeople(false) {
     timerInterval = 0.5f;
     startTime = 0.0f;
     spawningIndex = 0;
@@ -10,6 +10,11 @@ PersonManager::PersonManager(Shader shader): shaderProgram(shader), isTimeToSpaw
     isMovieFinished = false;
     allPeopleLeft = false;
     allPeopleSat = false;
+
+    this->modelFixes[0] = { 0.05f, 180.0f, 0.0f, 0.0f }; //1. Scale, 2. Rotation, 3. Vertikalno ispravljanje, 4. yOffset
+    this->modelFixes[1] = { 0.15f, 180.0f, 90.0f, -0.15f };
+    this->modelFixes[2] = { 0.2f, 180.0f, 0.0f, -0.15f };
+    this->modelFixes[3] = { 0.2f, 180.0f, 0.0f, -0.15f};
 };
 
 void PersonManager::draw(FloorManager& floorManager) {
@@ -20,29 +25,31 @@ void PersonManager::draw(FloorManager& floorManager) {
         for (Person& person : spawnedPeople) {
             person.move();
             this->shaderProgram.use();
-            this->shaderProgram.setBool("useTex", false);
+            this->shaderProgram.setBool("useTex", true);
+
+            float yOffset = this->modelFixes[person.modelIndex][3];
 
             glm::mat4 modelMat = glm::mat4(1.0f);
-            modelMat = glm::translate(modelMat, glm::vec3(person.x, person.y, person.z));
-            
+            modelMat = glm::translate(modelMat, glm::vec3(person.x, person.y + yOffset, person.z));
             
             if (person.isSitting) {
-                person.currentAngle = 0.0f;
+                person.currentAngle = this->modelFixes[person.modelIndex][1] - 180.0f;
             }
             else if (person.isMovingHorizontaly) {
-                person.currentAngle = -90.0f;
+                person.currentAngle = this->modelFixes[person.modelIndex][1] - 270.0f;
             }
             else {
-                person.currentAngle = 180.0f;
+                person.currentAngle = this->modelFixes[person.modelIndex][1];
             }
 
-            float scale = 0.05f;
+            float scale = this->modelFixes[person.modelIndex][0];
             modelMat = glm::rotate(modelMat, glm::radians(person.currentAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+            modelMat = glm::rotate(modelMat, glm::radians(this->modelFixes[person.modelIndex][2]), glm::vec3(1.0f, 0.0f, 0.0f));
             modelMat = glm::scale(modelMat, glm::vec3(scale, scale, scale));
             this->shaderProgram.setMat4("uM", modelMat);
 
             person.personModel.Draw(this->shaderProgram);
-             
+            this->shaderProgram.setBool("useTex", true);
             if (person.isSitting) {
    
 
@@ -64,9 +71,11 @@ void PersonManager::draw(FloorManager& floorManager) {
 }
 
 void PersonManager::arrangePeople(std::vector<Seat> usedSeats) {
+    int humanIndex = 0;
     for (Seat& seat : usedSeats) {
-        Person person = Person(0.75f, 0.15f, 0.99f, seat.x, seat.y, seat.z + 0.1f);
+        Person person = Person(humanIndex, 0.75f, 0.15f, 0.99f, seat.x, seat.y, seat.z + 0.1f);
         this->people.push_back(person);
+        humanIndex = (humanIndex + 1) % 3;
     }
     std::random_device rd;
     std::mt19937 g(rd());

@@ -164,6 +164,9 @@
     <None Include="Resources\Door\Custom Front door.mtl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\Seat\theater_chair.glb.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\movie_camera.png">
@@ -197,6 +200,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Door\wood door0002.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Seat\CustomMaterial_diffuse.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

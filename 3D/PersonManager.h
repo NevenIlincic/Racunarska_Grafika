@@ -37,6 +37,8 @@ public:
     bool allPeopleLeft;
     bool allPeopleSat;
 
+    std::map<int, std::vector<float>> modelFixes;
+
 
     PersonManager();
 

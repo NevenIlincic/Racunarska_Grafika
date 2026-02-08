@@ -32,13 +32,13 @@ WallsManager::WallsManager(Shader _shader) : shaderProgram(_shader) {
     //Back Wall
     std::vector<float> backWallLeftVertex = { -1.2f, 0.0f, -2.0f };
     std::vector<float> backWallNormalVector = { 0.0f, 0.0f, 1.0f };
-    TileVerticalWide* backWall = new TileVerticalWide(this->shaderProgram, backWallLeftVertex, backWallNormalVector, 2.2f, 2.0f, wallTileWideColor, true);
+    TileVerticalWide* backWall = new TileVerticalWide(this->shaderProgram, backWallLeftVertex, backWallNormalVector, 2.2f, 2.0f, wallTileWideColor, true, false);
     this->wallTiles.push_back(backWall);
 
     //Front Wall
     std::vector<float> frontWallDownLeftVertex = { -1.2f, 0.0f, 1.0f };
     std::vector<float> frontWallNormalVector = { 0.0f, 0.0f, -1.0f };
-    TileVerticalWide* frontWall = new TileVerticalWide(this->shaderProgram, frontWallDownLeftVertex, frontWallNormalVector, 2.2f, 2.0f, wallTileWideColor, false);
+    TileVerticalWide* frontWall = new TileVerticalWide(this->shaderProgram, frontWallDownLeftVertex, frontWallNormalVector, 2.2f, 2.0f, wallTileWideColor, false, false);
     this->wallTiles.push_back(frontWall);
 
     //Left Wall

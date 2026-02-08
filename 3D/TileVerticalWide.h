@@ -8,6 +8,7 @@
 
 #include "Tile.h"
 #include "Person.h"
+#include "Header/Util.h"
 
 class TileVerticalWide : public Tile {
 
@@ -21,13 +22,15 @@ public:
 
     bool isNormalTowardsPositive;
     bool drawTexture;
+    bool isTileCanvas;
 
     unsigned int VAO, VBO;
     Shader shaderProgram;
+    unsigned int texture;
 
     TileVerticalWide();
 
-    TileVerticalWide(Shader _shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _width, float _height, std::vector<float> color, bool _isNormalTowardsPositive);
+    TileVerticalWide(Shader _shader, std::vector<float> _downLeftVertex, std::vector<float> _normalVector, float _width, float _height, std::vector<float> color, bool _isNormalTowardsPositive, bool isTileCanvas);
 
     void draw();
 

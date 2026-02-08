@@ -4,6 +4,8 @@
 
 Seat::Seat(float _x, float _y, float _z, int _row, int _column)
 	: x(_x), y(_y), z(_z), row(_row), column(_column), r(0.0f), g(0.0f), b(1.0f), state(State::Free) {
+
+	//this->seatModel = Model("Resources/Seat/push_back_theatre_chair.glb.obj");
 };
 
 void Seat::reserveSeat() {

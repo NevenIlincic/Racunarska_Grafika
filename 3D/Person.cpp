@@ -4,15 +4,17 @@
 
 Person::Person() {};
 
-Person::Person(float _x, float _y, float _z, float _destinationX, float _destinationY, float _destinationZ) : 
+Person::Person(int index, float _x, float _y, float _z, float _destinationX, float _destinationY, float _destinationZ) : 
 	x(_x), y(_y), z(_z), destinationX(_destinationX), destinationY(_destinationY), destinationZ(_destinationZ),
 	isSitting(false), isMovingHorizontaly(false), speed(0.005f), finishedWatching(false), hasExited(false) {
 
 	this->startingX = _x;
 	this->startingY = _y;
 	this->startingZ = _z;
+		
+	this->modelIndex = index;
 
-	this->personModel = Model("Resources/Person/characterlowpoly2.obj");
+	this->personModel = Model("Resources/Person/person_" + std::to_string(this->modelIndex + 1) + "/person.obj");
 	this->currentAngle = 180.0f;
 };
 

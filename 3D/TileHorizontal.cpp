@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "TileHorizontal.h"
+#include "Header/Util.h"
 
 TileHorizontal::TileHorizontal(){}
 
@@ -21,18 +22,18 @@ TileHorizontal::TileHorizontal(Shader _shader, std::vector<float> _downLeftVerte
     std::vector<float> vertices;
     if (this->isNormalTowardsPositive) {
         vertices = {
-            x, y, z, 0.0f, 1.0f, 0.0f, //Donje levo teme
-            x + this->width, y, z, 0.0f, 1.0f, 0.0f, //Donje desno 
-            x + this->width, y, z - this->length, 0.0f, 1.0f, 0.0f, // Gornje desno
-            x, y, z - this->length, 0.0f, 1.0f, 0.0f, // Gornje levo
+            x, y, z, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, //Donje levo teme
+            x + this->width, y, z, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, //Donje desno 
+            x + this->width, y, z - this->length, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // Gornje desno
+            x, y, z - this->length, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f// Gornje levo
         };
     }
     else {
         vertices = {
-            x, y, z, 0.0f, 1.0f, 0.0f, //Levo prednje
-            x, y, z - this->length, 0.0f, 1.0f, 0.0f, //Levo zadnje 
-            x + this->width, y, z - this->length, 0.0f, 1.0f, 0.0f, // Desno zadnje
-            x + this->width, y, z, 0.0f, 1.0f, 0.0f, // Desno prednje
+            x, y, z, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,  //Levo prednje
+            x, y, z - this->length, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, //Levo zadnje 
+            x + this->width, y, z - this->length, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // Desno zadnje
+            x + this->width, y, z, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f// Desno prednje
         };
     }
 
@@ -44,21 +45,31 @@ TileHorizontal::TileHorizontal(Shader _shader, std::vector<float> _downLeftVerte
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
     // Pozicije
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // Normale (ako tvoj shader koristi location 3 za normale kao u SeatsManager-u)
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
+    preprocessTexture(this->texture, "Resources/Wall/ground.jpg", true);
+
 }
 
 void TileHorizontal::draw() {
     this->shaderProgram.use();
     glBindVertexArray(this->VAO);
 
-    this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    this->shaderProgram.setVec3("uMaterial.kA", 0.3f, 0.3f, 0.3f);
-    this->shaderProgram.setVec3("uMaterial.kS", 0.2f, 0.2f, 0.2f);
-    this->shaderProgram.setFloat("uMaterial.shine", 32.0f);
+    this->shaderProgram.setBool("useTex", true);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, this->texture);
+
+    this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0] * 0.9f, this->tileColor[1] * 0.9f, this->tileColor[2] * 0.9f);
+    this->shaderProgram.setVec3("uMaterial.kA", 0.8f, 0.8f, 0.8f);
+    this->shaderProgram.setVec3("uMaterial.kS", 0.4f, 0.4f, 0.4f);
+    this->shaderProgram.setFloat("uMaterial.shine", 64.0f);
 
     // Model matrica (ako ne rotiraš, ostaje identity)
     glm::mat4 model = glm::mat4(1.0f);
@@ -66,6 +77,7 @@ void TileHorizontal::draw() {
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     glBindVertexArray(0);
+    this->shaderProgram.setBool("useTex", false);
 }
 
 void TileHorizontal::checkCameraCollision(Camera& camera) {

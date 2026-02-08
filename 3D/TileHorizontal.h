@@ -21,6 +21,7 @@ public:
 	bool isNormalTowardsPositive; //positive normal ^    
 	unsigned int VAO, VBO;
 	Shader shaderProgram;
+	unsigned int texture;
 
 	TileHorizontal();
 

@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "TileVerticalElongated.h"
+#include "Header/Util.h"
 
 TileVerticalElongated::TileVerticalElongated() {}
 
@@ -17,20 +18,20 @@ TileVerticalElongated::TileVerticalElongated(Shader _shader, std::vector<float> 
     float x = this->downLeftVertex[0];
     float y = this->downLeftVertex[1];
     float z = this->downLeftVertex[2];
-    if (this->isNormalTowardsPositive) { //Posmatrano iz smera pozitivne normale CCW
+    if (this->isNormalTowardsPositive) {
         vertices = {
-            x, y, z, 1.0f, 0.0f, 0.0f, //Donje prednje
-            x, y, z - this->length, 1.0f, 0.0f, 0.0f, //Donje zadnje
-            x, y + this->height, z - this->length, 1.0f, 0.0f, 0.0f, // Gornje zadnje
-            x, y + this->height, z, 1.0f, 0.0f, 0.0f, // Gornje prednje
+            x, y, z,              1.0f, 0.0f, 0.0f,   0.0f, 0.0f, // Donje prednje
+            x, y, z - length,     1.0f, 0.0f, 0.0f,   1.0f, 0.0f, // Donje zadnje
+            x, y + height, z - length, 1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Gornje zadnje
+            x, y + height, z,     1.0f, 0.0f, 0.0f,   0.0f, 1.0f  // Gornje prednje
         };
     }
     else {
         vertices = {
-            x, y, z, -1.0f, 0.0f, 0.0f, //Donje prednje
-            x, y + this->height, z, -1.0f, 0.0f, 0.0f, //Gornje prednje
-            x, y + this->height, z - this->length, -1.0f, 0.0f, 0.0f, // Gornje zadnje
-            x, y, z - this->length, -1.0f, 0.0f, 0.0f, // Donje zadnje
+            x, y, z,             -1.0f, 0.0f, 0.0f,   0.0f, 0.0f,
+            x, y + height, z,    -1.0f, 0.0f, 0.0f,   0.0f, 1.0f,
+            x, y + height, z - length, -1.0f, 0.0f, 0.0f,   1.0f, 1.0f,
+            x, y, z - length,    -1.0f, 0.0f, 0.0f,   1.0f, 0.0f
         };
     }
 
@@ -42,22 +43,29 @@ TileVerticalElongated::TileVerticalElongated(Shader _shader, std::vector<float> 
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
     // Pozicije
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // Normale (ako tvoj shader koristi location 3 za normale kao u SeatsManager-u)
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
+
+    preprocessTexture(this->texture, "Resources/Wall/wall.jpg", true);
 
 }
 
 void TileVerticalElongated::draw() {
     this->shaderProgram.use();
     glBindVertexArray(this->VAO);
-
+    this->shaderProgram.setBool("useTex", true);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, this->texture);
     this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0], this->tileColor[1], this->tileColor[2]);
-    this->shaderProgram.setVec3("uMaterial.kA", 0.2f, 0.2f, 0.2f);
+    this->shaderProgram.setVec3("uMaterial.kA", 0.9f, 0.9f, 0.9f);
     this->shaderProgram.setVec3("uMaterial.kS", 0.2f, 0.2f, 0.2f);
-    this->shaderProgram.setFloat("uMaterial.shine", 32.0f);
+    this->shaderProgram.setFloat("uMaterial.shine", 64.0f);
 
     // Model matrica (ako ne rotiraš, ostaje identity)
     glm::mat4 model = glm::mat4(1.0f);
@@ -66,6 +74,8 @@ void TileVerticalElongated::draw() {
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     glBindVertexArray(0);
+    this->shaderProgram.setBool("useTex", false);
+
 
 }
 
