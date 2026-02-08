@@ -1,9 +1,10 @@
-﻿  TileVerticalWide.cpp
+﻿  PersonManager.cpp
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,36): warning C4244: 'argument': conversion from 'GLint' to 'T', possible loss of data
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,36): warning C4244:         with
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,36): warning C4244:         [
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,36): warning C4244:             T=glm::f32
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,36): warning C4244:         ]
-  (compiling source file 'TileVerticalWide.cpp')
+  (compiling source file 'PersonManager.cpp')
   
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\PersonManager.cpp(85,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\x64\Debug\Kostur.exe

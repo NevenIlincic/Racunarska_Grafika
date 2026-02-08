@@ -221,15 +221,15 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (isMoviePlaying) {
-            unifiedShader.setVec3("uLight.kA", 0.1f, 0.1f, 0.1f);
+            unifiedShader.setVec3("uLight.kA", 0.2f, 0.2f, 0.2f);
             unifiedShader.setVec3("uLight.kD", 1.0f, 1.0f, 0.9f);
             unifiedShader.setVec3("uLight.kS", 1.0f, 1.0f, 1.0f);
-            unifiedShader.setVec3("uLight.pos", 0.0f, 1.0f, 0.5f);
+            unifiedShader.setVec3("uLight.pos", 0.0f, 1.0f, 0.7f);
         }
         else {
             unifiedShader.setVec3("uLight.kA", 0.7f, 0.7f, 0.7f);
-            unifiedShader.setVec3("uLight.kD", 0.5f, 0.5f, 0.5f);
-            unifiedShader.setVec3("uLight.kS", 0.5f, 0.5f, 0.5f);
+            unifiedShader.setVec3("uLight.kD", 0.7f, 0.7f, 0.7f);
+            unifiedShader.setVec3("uLight.kS", 0.7f, 0.7f, 0.7f);
             unifiedShader.setVec3("uLight.pos", -0.2f, 1.85f, -0.5f);
         }
 

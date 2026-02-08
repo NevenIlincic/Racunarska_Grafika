@@ -15,6 +15,7 @@ PersonManager::PersonManager(Shader shader) : shaderProgram(shader), isTimeToSpa
     this->modelFixes[1] = { 0.15f, 180.0f, 90.0f, -0.15f };
     this->modelFixes[2] = { 0.2f, 180.0f, 0.0f, -0.15f };
     this->modelFixes[3] = { 0.2f, 180.0f, 0.0f, -0.15f};
+    this->modelFixes[4] = { 0.15f, 180.0f, 0.0f, -0.15f };
 };
 
 void PersonManager::draw(FloorManager& floorManager) {
@@ -71,11 +72,11 @@ void PersonManager::draw(FloorManager& floorManager) {
 }
 
 void PersonManager::arrangePeople(std::vector<Seat> usedSeats) {
-    int humanIndex = 0;
+    int humanIndex = 4;
     for (Seat& seat : usedSeats) {
         Person person = Person(humanIndex, 0.75f, 0.15f, 0.99f, seat.x, seat.y, seat.z + 0.1f);
         this->people.push_back(person);
-        humanIndex = (humanIndex + 1) % 3;
+       /* humanIndex = (humanIndex + 1) % 4;*/
     }
     std::random_device rd;
     std::mt19937 g(rd());

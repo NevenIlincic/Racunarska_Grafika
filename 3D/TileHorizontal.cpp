@@ -66,10 +66,10 @@ void TileHorizontal::draw() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->texture);
 
-    this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0] * 0.9f, this->tileColor[1] * 0.9f, this->tileColor[2] * 0.9f);
+    this->shaderProgram.setVec3("uMaterial.kD", this->tileColor[0] * 0.5f, this->tileColor[1] * 0.5f, this->tileColor[2] * 0.5f);
     this->shaderProgram.setVec3("uMaterial.kA", 0.8f, 0.8f, 0.8f);
     this->shaderProgram.setVec3("uMaterial.kS", 0.4f, 0.4f, 0.4f);
-    this->shaderProgram.setFloat("uMaterial.shine", 64.0f);
+    this->shaderProgram.setFloat("uMaterial.shine", 32.0f);
 
     // Model matrica (ako ne rotiraš, ostaje identity)
     glm::mat4 model = glm::mat4(1.0f);
