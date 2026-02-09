@@ -70,10 +70,10 @@ void Person::moveVerticalyFromSeat() {
 }
 
 void Person::moveHorizontalyFromSeat() {
-	if (this->x > startingX) {
-		this->x -= this->speed;
+	if (this->x < startingX) {
+		this->x += this->speed;
 	}
-	if (this->x <= startingX) {
+	if (this->x >= startingX) {
 		this->x = startingX;
 		this->isMovingHorizontaly = false;
 	}

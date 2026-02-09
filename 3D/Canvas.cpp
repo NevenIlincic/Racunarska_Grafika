@@ -17,7 +17,7 @@ Canvas::Canvas(Shader _shader, float _width, float _height): shaderProgram(_shad
     canvasScaleX = 1.4f;
     canvasScaleY = 0.25f;
 
-    movieTime = 20.0f;
+    movieTime = 2.0f; /// STAVI NA 20.0f
     frameCounter = 0;
     hasMovieStarted = false;
     isMovieFinished = false;

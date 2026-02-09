@@ -14,6 +14,7 @@
 class Person {
 public:
 	float x, y, z;
+	float yOffset;
 	float destinationX, destinationY, destinationZ;
 	float startingX, startingY, startingZ;
 	bool isSitting, isMovingHorizontaly;

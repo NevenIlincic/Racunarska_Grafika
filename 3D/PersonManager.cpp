@@ -16,6 +16,7 @@ PersonManager::PersonManager(Shader shader) : shaderProgram(shader), isTimeToSpa
     this->modelFixes[2] = { 0.2f, 180.0f, 0.0f, -0.15f };
     this->modelFixes[3] = { 0.2f, 180.0f, 0.0f, -0.15f};
     this->modelFixes[4] = { 0.15f, 180.0f, 0.0f, -0.15f };
+    this->modelFixes[5] = { 0.15f, 180.0f, 0.0f, -0.15f };
 };
 
 void PersonManager::draw(FloorManager& floorManager) {
@@ -24,23 +25,36 @@ void PersonManager::draw(FloorManager& floorManager) {
             spawnPerson();
         }
         for (Person& person : spawnedPeople) {
+            float yOffset = this->modelFixes[person.modelIndex][3];
+            person.yOffset = yOffset;
+            glm::mat4 modelMat = glm::mat4(1.0f);
+            modelMat = glm::translate(modelMat, glm::vec3(person.x, person.y + yOffset, person.z));
+
             person.move();
             this->shaderProgram.use();
             this->shaderProgram.setBool("useTex", true);
 
-            float yOffset = this->modelFixes[person.modelIndex][3];
 
-            glm::mat4 modelMat = glm::mat4(1.0f);
-            modelMat = glm::translate(modelMat, glm::vec3(person.x, person.y + yOffset, person.z));
             
             if (person.isSitting) {
                 person.currentAngle = this->modelFixes[person.modelIndex][1] - 180.0f;
             }
-            else if (person.isMovingHorizontaly) {
-                person.currentAngle = this->modelFixes[person.modelIndex][1] - 270.0f;
+            else if (person.isMovingHorizontaly) { // Krece se uz red
+                if (this->isMovieFinished) {
+                    person.currentAngle = this->modelFixes[person.modelIndex][1] - 90.0f;
+                }
+                else {
+                    person.currentAngle = this->modelFixes[person.modelIndex][1] - 270.0f;
+                }
             }
-            else {
-                person.currentAngle = this->modelFixes[person.modelIndex][1];
+            else { // Krece se uz zid
+                if (this->isMovieFinished) {
+                    person.currentAngle = this->modelFixes[person.modelIndex][1] - 180.0f;
+                }
+                else {
+                    person.currentAngle = this->modelFixes[person.modelIndex][1];
+
+                }
             }
 
             float scale = this->modelFixes[person.modelIndex][0];
@@ -72,11 +86,11 @@ void PersonManager::draw(FloorManager& floorManager) {
 }
 
 void PersonManager::arrangePeople(std::vector<Seat> usedSeats) {
-    int humanIndex = 4;
+    int humanIndex = 5;
     for (Seat& seat : usedSeats) {
         Person person = Person(humanIndex, 0.75f, 0.15f, 0.99f, seat.x, seat.y, seat.z + 0.1f);
         this->people.push_back(person);
-       /* humanIndex = (humanIndex + 1) % 4;*/
+        /*humanIndex = (humanIndex + 1) % 5;*/
     }
     std::random_device rd;
     std::mt19937 g(rd());

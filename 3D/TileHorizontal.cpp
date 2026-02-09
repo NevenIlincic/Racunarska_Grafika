@@ -62,7 +62,7 @@ void TileHorizontal::draw() {
     this->shaderProgram.use();
     glBindVertexArray(this->VAO);
 
-    this->shaderProgram.setBool("useTex", true);
+    this->shaderProgram.setBool("useTex", false); ///PROMENI NA TRUE
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->texture);
 

@@ -123,6 +123,7 @@ void TileVerticalWide::checkPersonCollision(Person& person, float stepHeight) {
             if (person.z < this->downLeftVertex[2] + 0.35f) {
                 person.y = person.y + stepHeight;
             }
+            
         }
         else {
             if (person.z > this->downLeftVertex[2] - this->maxCameraDistance) {
@@ -130,4 +131,12 @@ void TileVerticalWide::checkPersonCollision(Person& person, float stepHeight) {
             }
         }
     }
+    else {
+        ///SPUSTANJE
+        if (person.z > this->downLeftVertex[2] && person.y + person.yOffset > maxY - 0.01f) {
+            person.y = person.y - stepHeight;
+        }
+    }
+    
+
 }
