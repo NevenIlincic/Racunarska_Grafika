@@ -6,5 +6,5 @@ D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,3
 D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\shader.hpp(145,36): warning C4244:         ]
   (compiling source file 'PersonManager.cpp')
   
-D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\PersonManager.cpp(99,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\PersonManager.cpp(107,64): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Kostur.vcxproj -> D:\Fakultet\7.semestar\Racunarska Grafika\Racunarska_Grafika\3D\x64\Debug\Kostur.exe

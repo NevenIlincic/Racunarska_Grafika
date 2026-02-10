@@ -230,7 +230,7 @@ int main()
             unifiedShader.setVec3("uLight.kA", 0.7f, 0.7f, 0.7f);
             unifiedShader.setVec3("uLight.kD", 0.7f, 0.7f, 0.7f);
             unifiedShader.setVec3("uLight.kS", 0.7f, 0.7f, 0.7f);
-            unifiedShader.setVec3("uLight.pos", -0.2f, 1.85f, -0.5f);
+            unifiedShader.setVec3("uLight.pos", -0.2f, 1.85f, -0.0f); //z=-0.5f
         }
 
         camera.updateShader(projectionP);

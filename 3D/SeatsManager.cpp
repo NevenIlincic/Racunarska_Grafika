@@ -5,10 +5,9 @@
 SeatsManager::SeatsManager() {};
 
 SeatsManager::SeatsManager(int _rows, int _cols, Shader shader) : rows(_rows), cols(_cols), shaderProgram(shader) {
-    // Primer: 5x10 sedišta
     float spacingX = 0.15f;
     float spacingY = 0.3f;
-    seatSize = 0.6f;
+    seatSize = 0.15f; //0.6f
 
     canManipulateSeats = true;
 
@@ -20,7 +19,7 @@ SeatsManager::SeatsManager(int _rows, int _cols, Shader shader) : rows(_rows), c
         
 
     float offsetZ = -0.06f;
-    float offsetY = 0.06f;
+    float offsetY = -0.05f;
 
     for (int i = 0; i < this->rows; i++) {
         for (int j = 0; j < this->cols; j++) {
@@ -99,14 +98,14 @@ void SeatsManager::draw() {
     this->shaderProgram.use();
     glBindVertexArray(VAO);
 
-    this->shaderProgram.setVec3("uMaterial.kS", 0.1f, 0.1f, 0.1f);
-    this->shaderProgram.setFloat("uMaterial.shine", 32.0f);
+    this->shaderProgram.setVec3("uMaterial.kS", 0.5f, 0.5f, 0.5f);
+    this->shaderProgram.setFloat("uMaterial.shine", 64.0f);
 
-    this->shaderProgram.setBool("useTex", false);
+    this->shaderProgram.setBool("useTex", true);
 
     for (Seat& seat : seats) {
         this->shaderProgram.setVec3("uMaterial.kD", seat.r, seat.g, seat.b);
-        this->shaderProgram.setVec3("uMaterial.kA", seat.r * 0.1f, seat.g * 0.1f, seat.b * 0.1f);
+        this->shaderProgram.setVec3("uMaterial.kA", seat.r, seat.g, seat.b);
 
         // Pozicija konkretnog sedišta
         glm::mat4 model = glm::mat4(1.0f);
@@ -114,11 +113,11 @@ void SeatsManager::draw() {
         model = glm::scale(model, glm::vec3(seatSize, seatSize, seatSize));
         this->shaderProgram.setMat4("uM", model);
 
-        //seat.seatModel.Draw(this->shaderProgram);
+        seat.seatModel.Draw(this->shaderProgram);
 
-        for (int i = 0; i < 6; i++) {
+       /* for (int i = 0; i < 6; i++) {
             glDrawArrays(GL_TRIANGLE_FAN, i * 4, 4);
-        }
+        }*/
     }
     glBindVertexArray(0);
     this->shaderProgram.setBool("useTex", false);
@@ -137,7 +136,7 @@ void SeatsManager::reserve(Camera& camera) {
 }
 
 bool SeatsManager::isCameraLookingAt(Camera& cam, Seat& seat, float maxDistance) {
-    glm::vec3 seatPos = glm::vec3(seat.x, seat.y, seat.z);
+    glm::vec3 seatPos = glm::vec3(seat.x, seat.y + 0.15f, seat.z);
 
     // 1. Izračunaj stvarnu udaljenost između kamere i sedišta
     float dist = glm::distance(cam.position, seatPos);
@@ -149,7 +148,7 @@ bool SeatsManager::isCameraLookingAt(Camera& cam, Seat& seat, float maxDistance)
     glm::vec3 toSeat = glm::normalize(seatPos - cam.position);
     float cosAngle = glm::dot(cam.front, toSeat);
 
-    return cosAngle > 0.98f;
+    return cosAngle > 0.92f;
 }
 
 void SeatsManager::buySeats(int numSeats) {

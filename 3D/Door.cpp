@@ -7,7 +7,7 @@ Door::Door(Shader _shader, float _doorWidth, float _doorHeight): shaderProgram(_
 
     this->state = DoorState::Closed;
 
-    this->x = 0.75f;
+    this->x = 0.65f;
     this->y = 0.0f;
     this->z = 0.99f;
 

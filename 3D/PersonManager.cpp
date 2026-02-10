@@ -11,12 +11,21 @@ PersonManager::PersonManager(Shader shader) : shaderProgram(shader), isTimeToSpa
     allPeopleLeft = false;
     allPeopleSat = false;
 
-    this->modelFixes[0] = { 0.05f, 180.0f, 0.0f, 0.0f }; //1. Scale, 2. Rotation, 3. Vertikalno ispravljanje, 4. yOffset
-    this->modelFixes[1] = { 0.15f, 180.0f, 90.0f, -0.15f };
-    this->modelFixes[2] = { 0.2f, 180.0f, 0.0f, -0.15f };
-    this->modelFixes[3] = { 0.2f, 180.0f, 0.0f, -0.15f};
+    this->modelFixes[0] = { 0.25f, 270.0f, 0.0f, -0.15f}; //1. Scale, 2. Rotation, 3. y-rotacija, 4. z-rotacija, 5. yOffset
+    this->modelFixes[1] = { 0.3f, 270.0f, 0.0f, -0.15f };
+    this->modelFixes[2] = { 0.2f, 270, 0.0f, -0.15f };
+    this->modelFixes[3] = { 0.005f, 180.0f, 0.0f, -0.15f };
     this->modelFixes[4] = { 0.15f, 180.0f, 0.0f, -0.15f };
     this->modelFixes[5] = { 0.15f, 180.0f, 0.0f, -0.15f };
+    this->modelFixes[6] = { 0.15f, 180.0f, 0.0f, -0.15f };
+    this->modelFixes[7] = { 0.1f, 155.0f, 0.0f, -0.15f };
+    this->modelFixes[8] = { 0.1f, 120.0f, 0.0f, -0.15f };
+    this->modelFixes[9] = { 0.2f, 180.0f, 90.0f, -0.15f };
+    this->modelFixes[10] = { 0.5f, 180.0f, 0.0f, -0.15f };
+    this->modelFixes[11] = { 0.0015f, 180.0f, 90.0f, -0.15f };
+    this->modelFixes[12] = { 0.1f, 155.0f, 0.0f, -0.15f };
+    this->modelFixes[13] = { 0.0015f, 180.0f, 0.0f, -0.15f }; //Person 14
+    this->modelFixes[14] = { 0.25f, 270.0f, 0.0f, -0.15f };
 };
 
 void PersonManager::draw(FloorManager& floorManager) {
@@ -32,14 +41,15 @@ void PersonManager::draw(FloorManager& floorManager) {
 
             person.move();
             this->shaderProgram.use();
+      
             this->shaderProgram.setBool("useTex", true);
-
-
-            
+          
             if (person.isSitting) {
                 person.currentAngle = this->modelFixes[person.modelIndex][1] - 180.0f;
+                person.z = person.destinationZ - 0.08f;
             }
             else if (person.isMovingHorizontaly) { // Krece se uz red
+                person.z = person.destinationZ;
                 if (this->isMovieFinished) {
                     person.currentAngle = this->modelFixes[person.modelIndex][1] - 90.0f;
                 }
@@ -66,8 +76,6 @@ void PersonManager::draw(FloorManager& floorManager) {
             person.personModel.Draw(this->shaderProgram);
             this->shaderProgram.setBool("useTex", true);
             if (person.isSitting) {
-   
-
                 if (isMovieFinished) {
                     person.finishedWatching = true;
                     person.isSitting = false;
@@ -86,11 +94,11 @@ void PersonManager::draw(FloorManager& floorManager) {
 }
 
 void PersonManager::arrangePeople(std::vector<Seat> usedSeats) {
-    int humanIndex = 5;
+    int humanIndex = 0;
     for (Seat& seat : usedSeats) {
         Person person = Person(humanIndex, 0.75f, 0.15f, 0.99f, seat.x, seat.y, seat.z + 0.1f);
         this->people.push_back(person);
-        /*humanIndex = (humanIndex + 1) % 5;*/
+        humanIndex = (humanIndex + 1) % 15;
     }
     std::random_device rd;
     std::mt19937 g(rd());
